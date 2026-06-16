@@ -1,0 +1,62 @@
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+section {
+    flex: 1;
+    margin: 1%;
+}
+
+.contenedor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 40px 200px;
+}
+
+.marcoContacto { 
+    border-radius: 20px;
+    background-color: RGB(147, 112, 219);
+    max-width: 700px;
+    width: 90%; 
+    padding: 40px 30px;
+    text-align: left; 
+    position: relative;
+    overflow: hidden;
+}
+
+.main-title {
+    font-size: 2em;
+    color: #000000;
+    margin-bottom: 25px;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+}
+
+.formulario input, 
+.formulario textarea,
+.formulario button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px; 
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.enviar {
+    background-color: rgb(242, 64, 93) !important; /* Forzar la aplicación del color */
+    border-color: rgb(255, 255, 255) !important; /* Para que el borde sea del mismo color */
+    color: white !important; 
+    font-weight: bold !important;
+    cursor: pointer;
+}

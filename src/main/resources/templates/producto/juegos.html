@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Catálogo de Juegos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+	<script src="https://unpkg.com/htmx.org@1.9.10"></script>
+	
+    <link rel="stylesheet" th:href="@{/css/header.css}"> 
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/verprod.css}"> 
+</head>
+
+<body style="background-color: rgb(69, 69, 155);">
+    
+    <div th:replace="~{fragments/header :: menuPrincipal}"></div>
+    
+    <div class="container mt-5 mb-5">
+        <div class="row" id="contenido-principal">
+            
+            <div class="col-md-3">
+                <div class="card text-white mb-4" style="background-color: rgba(0,0,0,0.2); border: 1px solid rgb(242, 64, 93);">
+                    <div class="card-header" style="background-color: rgb(242, 64, 93);">
+                        <h4 class="mb-0">Categorías</h4>
+                    </div>
+                    <ul class="list-group list-group-flush" hx-boost="true" hx-target="#contenido-principal" hx-select="#contenido-principal" hx-swap="outerHTML">
+                     
+                        <a th:href="@{/producto/juegos}" 
+                           class="list-group-item list-group-item-action bg-transparent text-white border-secondary"
+                           th:style="${filter?.idCategoria == null or filter?.idCategoria == ''} ? 'background-color: rgba(242, 64, 93, 0.3) !important;' : ''">
+                            🎮 Todos los juegos
+                        </a>
+                        
+                        <a th:each="cat : ${lstCategoria}" 
+                           th:href="@{/producto/juegos(idCategoria=${cat.idCategoria})}" 
+                           class="list-group-item list-group-item-action bg-transparent text-white border-secondary"
+                           th:style="${filter?.idCategoria == cat.idCategoria} ? 'background-color: rgba(242, 64, 93, 0.3) !important;' : ''"
+                           th:text="${cat.descripcion}">
+                            Nombre Categoría
+                        </a>
+                        
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="col-md-9" id="zona-juegos">
+                
+                <h2 class="text-white mb-4">Juegos</h2>
+                
+				<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+
+				    <div class="col" th:each="juego : ${lstJuegos}">
+				        
+				        <a th:href="@{/producto/detalles_juego(id=${juego.idJuegos})}" class="GameCardLink text-decoration-none">
+				            <div class="h-100 d-flex flex-column" style="border-radius: 12px; background-color: rgba(255,255,255,0.05); padding-bottom: 10px; transition: transform 0.2s;">      
+				                
+				                <img th:src="@{'/uploads/ImgJuegos/' + ${juego.imagen}}" 
+				                     class="card-img-top"
+				                     style="height: 300px; object-fit: cover; border-radius: 12px 12px 0 0;"
+				                     alt="Portada del juego">
+				                     
+				                <div class="card-body text-center p-3 d-flex flex-column justify-content-center flex-grow-1">
+				                    <h5 class="card-title text-white mb-0" th:text="${juego.descripcion}"></h5>
+				                    <p class="text-warning fw-bold fs-5 mb-0 mt-1" 
+				                       th:text="'S/. ' + ${#numbers.formatDecimal(juego.precio, 1, 2)}"></p>
+				                </div>
+				            </div>
+				        </a>
+				    </div>
+				    
+				</div>
+                    
+                    <div th:if="${#lists.isEmpty(lstJuegos)}" class="col-12 text-center text-white mt-5">
+                        <i class="bi bi-controller" style="font-size: 3rem;"></i>
+                        <h4>No hay juegos disponibles en esta categoría por ahora.</h4>
+                    </div>
+                </div>
+                
+            </div> 
+            
+        </div>
+    </div>
+
+    <div th:replace="~{fragments/footer :: pieDePagina}"></div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

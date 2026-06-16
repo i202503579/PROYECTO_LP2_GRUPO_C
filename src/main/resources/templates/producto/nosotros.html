@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sobre nosotros</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    
+    <link rel="stylesheet" th:href="@{/css/header.css}"> 
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/nosotros.css}">
+</head>
+
+<body style="background-color: rgb(69, 69, 155);">
+    
+    <div th:replace="~{fragments/header :: menuPrincipal}"></div>
+
+    <section>
+        <div class="Integrantes">
+            <h2>Integrantes</h2>
+            <div class="Perfil">
+                <figure>
+                    <img th:src="@{/img/Gato1.gif}" alt="Avatar integrante">
+                    <figcaption>XXXXXXX</figcaption>
+                </figure>
+                <figure>
+                    <img th:src="@{/img/Gato2.gif}" alt="Avatar integrante">
+                    <figcaption>XXXXXXX</figcaption>
+                </figure>
+                <figure>
+                    <img th:src="@{/img/Gato3.gif}" alt="Avatar integrante">
+                    <figcaption>XXXXXXXX</figcaption>
+                </figure>
+            </div>
+        </div>
+
+        <div class="Nosotros">
+            <h1><strong><u>Sobre Nosotros</u></strong></h1>
+            <p>
+                Nacimos con una misión simple: conectar a los jugadores con las mejores experiencias. No somos solo una tienda, somos gamers apasionados como tú.<br><br>
+            </p>
+            <p>
+                Desde 2024, nos hemos dedicado a traer los últimos lanzamientos, consolas y accesorios 
+                a precios justos para toda la comunidad en Perú. Creemos que el gaming es para todos, 
+                y nuestro catálogo lo demuestra.<br><br>
+            </p>
+            <p>
+                ¡Gracias por elegirnos!
+            </p>
+        </div>
+    </section>
+   
+    <div th:replace="~{fragments/footer :: pieDePagina}"></div>
+    
+</body>
+</html>

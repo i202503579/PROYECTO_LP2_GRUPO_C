@@ -1,0 +1,102 @@
+body {
+        background-color: rgb(69, 69, 155);
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    section {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px 20px;
+    }
+    
+    .registro-container {
+        background-color: RGB(147, 112, 219);
+        border-radius: 20px;
+        padding: 40px;
+        max-width: 600px;
+        width: 100%;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+    
+    .registro-titulo {
+        color: white;
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 2em;
+        font-weight: bold;
+    }
+    
+    .form-label {
+        color: white;
+        font-weight: 500;
+    }
+    
+    .form-control, .form-select {
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        padding: 10px;
+    }
+    
+    .form-control:focus, .form-select:focus {
+        border-color: rgb(242, 64, 93);
+        box-shadow: 0 0 0 0.2rem rgba(242, 64, 93, 0.25);
+    }
+    
+    .btn-registro {
+        background-color: rgb(242, 64, 93);
+        border: none;
+        color: white;
+        font-weight: bold;
+        padding: 12px;
+        width: 100%;
+        border-radius: 8px;
+        font-size: 1.1em;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-registro:hover {
+        background-color: rgb(255, 127, 127);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(242, 64, 93, 0.4);
+    }
+    
+    .btn-cancelar {
+        background-color: transparent;
+        border: 2px solid white;
+        color: white;
+        font-weight: bold;
+        padding: 10px;
+        width: 100%;
+        border-radius: 8px;
+        margin-top: 10px;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-cancelar:hover {
+        background-color: white;
+        color: rgb(69, 69, 155);
+    }
+    
+    .alert {
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+    
+    .sexo-group {
+        display: flex;
+        gap: 20px;
+        padding-top: 8px;
+    }
+    
+    .sexo-option {
+        color: white;
+    }
+    
+    .sexo-option input {
+        margin-right: 5px;
+    }

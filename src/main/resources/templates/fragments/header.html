@@ -1,0 +1,67 @@
+<header th:fragment="menuPrincipal" class="navbar p-3 navbar-dark bg-custom-pink">
+    <div class="container-fluid d-flex align-items-center">
+        
+        <a th:href="@{/producto/inicio}"><img th:src="@{/img/logo.png}" alt="Logo MundoGamer"></a>
+
+		<form class="d-flex BarraBusqueda ms-3" role="search" th:action="@{/producto/juegos}" method="get">
+		    <input name="nombre" id="Buscar" class="form-control me-2 custom-search-input" type="search" placeholder="Buscar juego...">
+		</form>
+
+        <div id="menu" class="d-flex justify-content-center flex-grow-1">
+            <ul id="Barra" class="navbar-nav d-flex flex-row mb-0">
+                <li class="nav-item mx-4"><a class="nav-link" th:href="@{/producto/inicio}">Inicio</a></li>
+                <li class="nav-item mx-4"><a class="nav-link" th:href="@{/producto/nosotros}">Sobre nosotros</a></li>
+                <li class="nav-item mx-4"><a class="nav-link" th:href="@{/producto/juegos}">Juegos</a></li>
+                <li class="nav-item mx-4"><a class="nav-link" th:href="@{/producto/contactanos}">Contactanos</a></li>
+            </ul>
+        </div>
+
+        <div class="d-flex align-items-center me-3">
+           
+            <div class="dropdown" th:if="${usuario != null}">
+                <button class="btn dropdown-toggle text-white d-flex align-items-center" type="button" 
+                        id="dropdownUsuario" data-bs-toggle="dropdown" aria-expanded="false"
+                        style="background-color: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">
+                    <i class="bi bi-person-circle me-2"></i>
+                    
+                    <span th:text="${usuario.nombres}">NombreUsuario</span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUsuario">
+                    <li class="dropdown-header">
+                        <strong th:text="${usuario.nombres} + ' ' + ${usuario.apellidos}">Nombres y Apellidos</strong><br>
+                        <small class="text-muted" th:text="${usuario.correo}">correo@usuario.com</small>
+                    </li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                        <form method="post" th:action="@{/logout}" class="m-0">
+                            <button type="submit" class="dropdown-item text-danger">
+                                <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+
+            <a th:href="@{/producto/inicio}" th:if="${usuario == null}" class="text-white text-decoration-none d-flex align-items-center"
+               style="background-color: rgba(255,255,255,0.1); padding: 8px 15px; border-radius: 20px;">
+                <i class="bi bi-person-circle me-2"></i>
+                <span>Iniciar sesión</span>
+            </a>
+            
+        </div>
+
+        <div class="carrito position-relative">
+            <a href="" class="text-white">
+                <i class="bi bi-cart fs-4"></i>
+                
+                <span id="" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" 
+                      style="font-size: 0.7rem;">
+                    0
+                    <span class="visually-hidden">items en el carrito</span>
+                </span>
+                
+            </a>
+        </div>
+    </div>
+</header>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
