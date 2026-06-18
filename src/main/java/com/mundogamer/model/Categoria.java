@@ -20,7 +20,5 @@ public class Categoria {
 	@Column(name = "Descripcion")
 	private String descripcion;
 	
-	@Column(name = "Imagen")
-	private String imagen;
 }
 

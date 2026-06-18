@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Categorías</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.2/css/dataTables.bootstrap5.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/2.3.2/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.3.2/js/dataTables.bootstrap5.js"></script>
+    
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+    <link rel="stylesheet" th:href="@{/css/dataTable.css}">
+</head>
+<body>
+
+<div class="d-flex" style="min-height: 100vh;">
+
+	<div class="sidebar p-3 d-flex flex-column" style="width: 250px; background-color: rgba(0, 0, 0, 0.3);">
+	        <a href="#" class="text-white text-decoration-none text-center mb-4 mt-2">
+	            <h3 style="color: var(--color-acento-principal); font-weight: bold;">MundoGamer</h3>
+	            <small>Panel de Control</small>
+	        </a>
+	        <hr class="text-white">
+			<ul class="nav nav-pills flex-column mb-auto">
+	            <li class="nav-item mb-2">
+	                <a th:href="@{/admin/lista-juegos}" class="nav-link text-white item-sidebar">
+	                    <i class="bi bi-joystick"></i> Gestión de Juegos
+	                </a>
+	            </li>
+				<li class="nav-item mb-2">
+	                <a th:href="@{/admin/lista-categorias}" class="nav-link text-white item-sidebar active" style="background-color: var(--color-acento-principal);">
+	                    <i class="bi bi-chat-left-dots-fill"></i> Categorias
+	                </a>
+	            </li>
+	            <li class="nav-item mb-2">
+	                <a th:href="@{/admin/lista-usuarios}" class="nav-link text-white ">
+	                    <i class="bi bi-people-fill"></i> Usuarios
+	                </a>
+	            </li>
+	            <li class="nav-item mb-2">
+	                <a th:href="@{/admin/mensaje}" class="nav-link text-white item-sidebar">
+	                    <i class="bi bi-chat-left-dots-fill"></i> Mensajes
+	                </a>
+	            </li>     
+	        </ul>
+	    </div>
+
+    <div class="flex-grow-1 p-4 w-100">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="mb-0">Gestión de Categorías</h2>
+                <a  th:href="@{/admin/registrar-categoria}" class="btn btn-success px-4 py-2"><i></i>Registrar</a>
+            </div>
+
+            <div class="card card-admin p-4 shadow-lg">
+                <table id="tbl-categorias" class="table table-hover align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID Categoría</th>
+                            <th>Descripción</th>
+							<th class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="categoria : ${lstCategoria}">
+                            <td th:text="${categoria.idCategoria}">CAT001</td>
+                            <td th:text="${categoria.descripcion}">Acción</td>
+							<td class="text-center">
+					            <a th:href="@{'/admin/modificar-categoria/' + ${categoria.idCategoria}}" class="btn btn-sm btn-primary">Editar</a>
+					        </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        $(document).ready(function () {
+            $('#tbl-categorias').DataTable({
+                language: {
+                    "lengthMenu": "Mostrar _MENU_ categorías",
+                    "zeroRecords": "No se encontraron categorías",
+                    "info": "Mostrando _END_ categorías de _TOTAL_ ",
+                    "infoEmpty": "Mostrando 0 categorías",
+                    "infoFiltered": "(filtrado de _MAX_ totales)",
+                    "search": "Buscar Categoría:",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Último",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                },
+                pageLength: 10,
+                lengthMenu: [5, 10, 20],
+                ordering: true,
+                responsive: true,
+                columnDefs: [
+                    { targets: [0], className: 'dt-left' }, 
+                    { targets: [2], orderable: false } 
+                ]
+            });
+        });
+    </script>
+</div>
+
+</body>
+</html>

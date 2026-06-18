@@ -14,30 +14,21 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "Contactos")
+@Table(name = "Mensaje")
 @Getter
 @Setter
-public class Contacto {
+public class Mensaje {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "IdContacto")
-	private Integer idContacto;
+	@Column(name = "IdMensaje")
+	private Integer idMensaje;
 	
 	@ManyToOne
 	@JoinColumn(name = "IdCliente")
 	private Cliente cliente;
 	
-	@Column(name = "Nombre")
-	private String nombre;
-	
-	@Column(name = "Email")
-	private String email;
-	
-	@Column(name = "Telefono")
-	private String telefono;
-	
-	@Column(name = "Mensaje")
+	@Column(name = "TextoMensaje")
 	private String mensaje;
 	
 	@Column(name = "FechaEnvio")

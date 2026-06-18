@@ -9,13 +9,13 @@
 	
     <link rel="stylesheet" th:href="@{/css/header.css}"> 
     <link rel="stylesheet" th:href="@{/css/footer.css}">
-    <link rel="stylesheet" th:href="@{/css/verprod.css}"> 
+	<link rel="stylesheet" th:href="@{/css/juegos.css}">
 </head>
 
 <body style="background-color: rgb(69, 69, 155);">
     
     <div th:replace="~{fragments/header :: menuPrincipal}"></div>
-    
+	<div class="flex-grow-1">
     <div class="container mt-5 mb-5">
         <div class="row" id="contenido-principal">
             
@@ -82,7 +82,7 @@
             
         </div>
     </div>
-
+	</div>
     <div th:replace="~{fragments/footer :: pieDePagina}"></div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>

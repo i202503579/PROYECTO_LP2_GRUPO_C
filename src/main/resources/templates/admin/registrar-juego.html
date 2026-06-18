@@ -15,7 +15,7 @@
             <h1 class="text-center text-white mb-4">Registrar Nuevo Juego</h1>
             <div class="row d-flex justify-content-center">
                 <div class="col-md-8">
-                    <form class="row g-3" th:action="@{/admin/registrar}" th:object="${juego}" method="post" enctype="multipart/form-data">
+                    <form class="row g-3" th:action="@{/admin/registrar-juego}" th:object="${juego}" method="post" enctype="multipart/form-data">
                         
                         <div class="col-md-12">
                             <label class="form-label text-white">Nombre del Juego</label>
@@ -46,7 +46,7 @@
 						</div>
 
                         <div class="col-md-12 d-flex justify-content-between mt-4">
-                            <a th:href="@{/admin/listado}" class="btn btn-outline-light">
+                            <a th:href="@{/admin/lista-juegos}" class="btn btn-outline-light">
                                 <i class="fa-solid fa-reply"></i> Regresar
                             </a>
                             <button type="submit" class="btn btn-success">

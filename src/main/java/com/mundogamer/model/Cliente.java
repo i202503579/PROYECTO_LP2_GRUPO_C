@@ -31,6 +31,9 @@ public class Cliente {
 	@Column(name = "Direccion")
 	private String direccion;
 	
+	@Column(name = "Telefono")
+	private String telefono;
+	
 	@Column(name = "FechaNacimiento")
 	private LocalDate fechaNacimiento;
 	

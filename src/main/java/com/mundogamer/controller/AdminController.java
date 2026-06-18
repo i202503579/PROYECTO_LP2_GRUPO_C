@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.mundogamer.model.Categoria;
 import com.mundogamer.model.Juego;
 import com.mundogamer.service.CategoriaService;
 import com.mundogamer.service.JuegoService;
@@ -32,21 +33,21 @@ public class AdminController {
 	private final JuegoService juegoService;
 	private final CategoriaService categoriaService;
 	
-	@GetMapping("listado")
-	public String listarAdmin(Model model) {
+	@GetMapping("lista-juegos")
+	public String listarJuego(Model model) {
 	    model.addAttribute("lstJuegos", juegoService.getAllAdmin());
-	    return "admin/listado";
+	    return "admin/lista-juegos";
 	}
 	
-	@GetMapping("registrar")
-	public String Nuevo(Model model) {
+	@GetMapping("registrar-juego")
+	public String NuevoJuego(Model model) {
 		model.addAttribute("categorias", categoriaService.getAll());
 		model.addAttribute("juego", new Juego());
-		return "admin/registrar";
+		return "admin/registrar-juego";
 	}
 	
-	@PostMapping("registrar")
-	public String registrar(@ModelAttribute Juego juego, @RequestParam MultipartFile file, 
+	@PostMapping("registrar-juego")
+	public String registrarJuego(@ModelAttribute Juego juego, @RequestParam MultipartFile file, 
 	                        RedirectAttributes flash) {
 	    
 	    if (!file.isEmpty()) {
@@ -79,23 +80,23 @@ public class AdminController {
 	        } catch (IOException | NumberFormatException e) {
 	            e.printStackTrace();
 	            flash.addFlashAttribute("Alert", Alert.sweetAlertError("Error al procesar la imagen"));
-	            return "redirect:/admin/registrar";
+	            return "redirect:/admin/registrar-juego";
 	        }
 	    }
 
 	    var response = juegoService.create(juego);
 	    flash.addFlashAttribute("Alert", Alert.sweetToast(response.mensaje(), "success", 5000));
-	    return "redirect:/admin/listado";
+	    return "redirect:/admin/lista-juegos";
 	}
 	
-	@GetMapping("modificar/{id}")
-	public String modificar(@PathVariable Integer id, Model model) {
+	@GetMapping("modificar-juego/{id}")
+	public String modificarJuego(@PathVariable Integer id, Model model) {
 	    model.addAttribute("categorias", categoriaService.getAll());
 	    model.addAttribute("juego", juegoService.getById(id));
-	    return "admin/modificar";
+	    return "admin/modificar-juego";
 	}
 	
-	@PostMapping("modificar")
+	@PostMapping("modificar-juego")
 	public String guardarModificacion(@ModelAttribute Juego juego, 
 	                                  @RequestParam(value = "file", required = false) MultipartFile file, 
 	                                  Model model, RedirectAttributes flash) {
@@ -106,7 +107,7 @@ public class AdminController {
 	            Files.write(Paths.get(rutaAbsoluta + juego.getImagen()), file.getBytes());
 	        } catch (IOException e) {
 	            model.addAttribute("Alert", Alert.sweetAlertError("Error al actualizar la imagen"));
-	            return "admin/modificar";
+	            return "admin/modificar-juego";
 	        }
 	    }
 	    var response = juegoService.create(juego);
@@ -114,10 +115,61 @@ public class AdminController {
 	        model.addAttribute("categorias", categoriaService.getAll());
 	        model.addAttribute("juego", juego);
 	        model.addAttribute("Alert", Alert.sweetAlertError(response.mensaje()));
-	        return "admin/modificar";
+	        return "admin/modificar-juego";
 	    }
 
 	    flash.addFlashAttribute("Alert", Alert.sweetToast(response.mensaje(), "success", 5000));
-	    return "redirect:/admin/listado";
+	    return "redirect:/admin/lista-juegos";
 	}
+	
+	@GetMapping("lista-categorias")
+	public String listarCategoria(Model model) {
+	    model.addAttribute("lstCategoria", categoriaService.getAll());
+	    return "admin/lista-categorias";
+	}
+	
+	@GetMapping("registrar-categoria")
+	public String NuevaCategoria(Model model) {
+		model.addAttribute("categoria", new Categoria());
+		return "admin/registrar-categoria";
+	}
+	
+	@GetMapping("modificar-categoria/{id}")
+    public String modificarCategoria(@PathVariable String id , Model model) {	        
+	    model.addAttribute("categoria", categoriaService.getOne(id));
+        return "admin/modificar-categoria";
+    }
+	
+	@PostMapping("guardar-categoria")
+	public String guardar(@ModelAttribute Categoria categoria, Model model, RedirectAttributes flash) {
+	    var response = categoriaService.save(categoria);
+	    if (!response.success()) {
+	        model.addAttribute("categoria", categoria);
+	        model.addAttribute("Alert", Alert.sweetAlertError(response.mensaje()));
+	        return "admin/registrar-categoria";
+	    }
+	    var toast = Alert.sweetToast(response.mensaje(), "success", 5000);
+	    flash.addFlashAttribute("Alert", toast);
+	    return "redirect:/admin/lista-categorias";
+	}
+	
+	@GetMapping("mensaje")
+	public String listarMensaje(Model model) {
+	    
+	    return "admin/mensaje";
+	}
+	
+	@GetMapping("lista-usuarios")
+	public String listarUsuario(Model model) {
+	    
+	    return "admin/lista-usuarios";
+	}
+	
+	@GetMapping("modificar-usuario")
+	public String modificarUsuario(Model model) {
+	    
+	    return "admin/modificar-usuario";
+	}
+	
+	
 }

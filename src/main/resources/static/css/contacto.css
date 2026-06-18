@@ -1,13 +1,19 @@
+:root {
+    --color-fondo-principal: rgb(69, 69, 155);
+    --color-acento-principal: rgb(242, 64, 93);
+}
+
 body {
     margin: 0;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    background-color: var(--color-fondo-principal) !important; 
+    color: white;
 }
 
 section {
     flex: 1;
-    margin: 1%;
 }
 
 .contenedor {
@@ -15,48 +21,71 @@ section {
     justify-content: center;
     align-items: center;
     min-height: 80vh;
-    padding: 40px 200px;
+    padding: 40px 20px;
 }
 
 .marcoContacto { 
-    border-radius: 20px;
-    background-color: RGB(147, 112, 219);
-    max-width: 700px;
-    width: 90%; 
-    padding: 40px 30px;
-    text-align: left; 
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--color-acento-principal);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    max-width: 550px; /* Un poco más angosto para que se vea más elegante */
+    width: 100%; 
+    padding: 40px;
     position: relative;
     overflow: hidden;
 }
 
 .main-title {
-    font-size: 2em;
-    color: #000000;
-    margin-bottom: 25px;
-    letter-spacing: 2px;
+    font-size: 2.2em;
+    color: white;
+    margin-bottom: 30px;
+    font-weight: bold;
     text-align: center;
 }
 
-.formulario {
-    display: flex;
-    flex-direction: column;
+.formulario label {
+    font-weight: 500;
+    color: white;
+    margin-bottom: 5px;
 }
 
 .formulario input, 
-.formulario textarea,
-.formulario button {
+.formulario textarea {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 10px; 
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    padding: 12px 15px;
+    background-color: rgba(0, 0, 0, 0.3) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: white !important;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.formulario input::placeholder,
+.formulario textarea::placeholder {
+    color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.formulario input:focus, 
+.formulario textarea:focus {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    border-color: var(--color-acento-principal) !important;
+    box-shadow: 0 0 8px rgba(242, 64, 93, 0.5) !important;
+    outline: none;
 }
 
 .enviar {
-    background-color: rgb(242, 64, 93) !important; /* Forzar la aplicación del color */
-    border-color: rgb(255, 255, 255) !important; /* Para que el borde sea del mismo color */
+    background-color: var(--color-acento-principal) !important;
+    border: none !important; 
     color: white !important; 
     font-weight: bold !important;
+    padding: 12px 30px;
+    border-radius: 8px;
     cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.enviar:hover {
+    background-color: rgb(215, 45, 75) !important;
+    box-shadow: 0 0 12px rgba(242, 64, 93, 0.6);
 }

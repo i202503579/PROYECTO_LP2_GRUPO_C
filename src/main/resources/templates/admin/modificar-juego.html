@@ -12,7 +12,7 @@
     <div class="container mt-5">
         <div class="card card-admin p-4">
             <h1 class="text-center text-white mb-4" th:text="|Modificar Juego #${juego.idJuegos}|"></h1>
-            <form th:action="@{/admin/modificar}" th:object="${juego}" method="post" enctype="multipart/form-data">
+            <form th:action="@{/admin/modificar-categoria}" th:object="${juego}" method="post" enctype="multipart/form-data">
                 
                 <input type="hidden" th:field="*{idJuegos}" />
                 <input type="hidden" th:field="*{imagen}" /> <div class="row g-3">
@@ -42,7 +42,7 @@
                     </div>
 
                     <div class="col-md-12 d-flex justify-content-between mt-4">
-                        <a th:href="@{/admin/lista}" class="btn btn-outline-light">Regresar</a>
+                        <a th:href="@{/admin/lista-juegos}" class="btn btn-outline-light">Regresar</a>
                         <button type="submit" class="btn btn-primary">Guardar Cambios</button>
                     </div>
                 </div>

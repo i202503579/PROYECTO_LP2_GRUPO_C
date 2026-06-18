@@ -4,42 +4,9 @@
     --color-secundario-claro: rgb(255, 127, 127);
 }
 
-.card {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    border: none !important; 
-    overflow: hidden;
-    color: white; 
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5) !important; 
+.GameCardLink:hover .h-100 {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    background-color: rgba(255, 255, 255, 0.1) !important;
     cursor: pointer;
-}
-
-.card-title {
-    color: white !important; 
-}
-
-.text-warning { 
-    color: var(--color-acento-principal) !important; 
-    font-size: 1.1em;
-}
-
-.btn-custom-accent {
-    background-color: var(--color-acento-principal) !important;
-    border-color: var(--color-acento-principal) !important;
-    color: white !important;
-    font-weight: bold;
-}
-
-.btn-custom-accent:hover {
-    background-color: var(--color-secundario-claro) !important;
-    border-color: var(--color-secundario-claro) !important;
-    color: #333 !important; /* Texto oscuro en hover */
-}
-
-.GameCardLink {
-    display: block;
-    width: 100%;
 }
