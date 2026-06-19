@@ -17,10 +17,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.mundogamer.dto.ClienteFilter;
+import com.mundogamer.dto.JuegoFilter;
 import com.mundogamer.model.Categoria;
 import com.mundogamer.model.Juego;
 import com.mundogamer.service.CategoriaService;
+import com.mundogamer.service.ClienteService;
 import com.mundogamer.service.JuegoService;
+import com.mundogamer.service.MensajeService;
 import com.mundogamer.util.Alert;
 
 import lombok.RequiredArgsConstructor;
@@ -32,10 +36,22 @@ public class AdminController {
 
 	private final JuegoService juegoService;
 	private final CategoriaService categoriaService;
+	private final MensajeService mensajeService;
+	private final ClienteService clienteService;
 	
 	@GetMapping("lista-juegos")
 	public String listarJuego(Model model) {
 	    model.addAttribute("lstJuegos", juegoService.getAllAdmin());
+	    model.addAttribute("filter_j", new JuegoFilter());
+	    model.addAttribute("categorias", categoriaService.getAll());
+	    return "admin/lista-juegos";
+	}
+	
+	@GetMapping("filtra-juegos")
+	public String filtrado(@ModelAttribute JuegoFilter filter_j,Model model) {
+	    model.addAttribute("lstJuegos", juegoService.search(filter_j));
+	    model.addAttribute("categorias", categoriaService.getAll());
+	    model.addAttribute("filter_j", filter_j);
 	    return "admin/lista-juegos";
 	}
 	
@@ -155,13 +171,21 @@ public class AdminController {
 	
 	@GetMapping("mensaje")
 	public String listarMensaje(Model model) {
-	    
+		model.addAttribute("lstMensajes", mensajeService.getAllMensaje());
 	    return "admin/mensaje";
 	}
 	
 	@GetMapping("lista-usuarios")
 	public String listarUsuario(Model model) {
-	    
+	    model.addAttribute("lstClientes", clienteService.getAllAdmin());
+	    model.addAttribute("filter_c", new ClienteFilter());
+	    return "admin/lista-usuarios";
+	}
+
+	@GetMapping("filtra-usuarios")
+	public String filtrado(@ModelAttribute ClienteFilter filter_c, Model model) {
+	    model.addAttribute("lstClientes", clienteService.search(filter_c));
+	    model.addAttribute("filter_c", filter_c);
 	    return "admin/lista-usuarios";
 	}
 	

@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Listado de Juegos</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+	<meta charset="UTF-8">
+	<title>Listado de Juegos</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-	
+
 	<link rel="stylesheet" href="https://cdn.datatables.net/2.3.2/css/dataTables.bootstrap5.css">
 	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -14,108 +15,144 @@
 	<link rel="stylesheet" th:href="@{/css/admin.css}">
 	<link rel="stylesheet" th:href="@{/css/dataTable.css}">
 </head>
+
 <body>
 
-<div class="d-flex" style="min-height: 100vh;">
+	<div class="d-flex" style="min-height: 100vh;">
 
-    <div class="sidebar p-3 d-flex flex-column" style="width: 250px; background-color: rgba(0, 0, 0, 0.3);">
-        <a href="#" class="text-white text-decoration-none text-center mb-4 mt-2">
-            <h3 style="color: var(--color-acento-principal); font-weight: bold;">MundoGamer</h3>
-            <small>Panel de Control</small>
-        </a>
-        
-        <hr class="text-white">
+		<div class="sidebar p-3 d-flex flex-column" style="width: 250px; background-color: rgba(0, 0, 0, 0.3);">
+			<a href="#" class="text-white text-decoration-none text-center mb-4 mt-2">
+				<h3 style="color: var(--color-acento-principal); font-weight: bold;">MundoGamer</h3>
+				<small>Panel de Control</small>
+			</a>
 
-		<ul class="nav nav-pills flex-column mb-auto">
-            <li class="nav-item mb-2">
-                <a th:href="@{/admin/lista-juegos}" class="nav-link text-white item-sidebar active" style="background-color: var(--color-acento-principal);">
-                    <i class="bi bi-joystick"></i> Gestión de Juegos
-                </a>
-            </li>
-			<li class="nav-item mb-2">
-                <a th:href="@{/admin/lista-categorias}" class="nav-link text-white item-sidebar">
-                    <i class="bi bi-chat-left-dots-fill"></i> Categorias
-                </a>
-            </li>
-            <li class="nav-item mb-2">
-                <a th:href="@{/admin/lista-usuarios}" class="nav-link text-white">
-                    <i class="bi bi-people-fill"></i> Usuarios
-                </a>
-            </li>
-            <li class="nav-item mb-2">
-                <a th:href="@{/admin/mensaje}" class="nav-link text-white item-sidebar">
-                    <i class="bi bi-chat-left-dots-fill"></i> Mensajes
-                </a>
-            </li>     
-        </ul>
-    </div>
+			<hr class="text-white">
 
-    <div class="flex-grow-1 p-4 w-100">
-        <div class="container">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2 class="mb-0">Gestión de Juegos</h2>
-                <a th:href="@{/admin/registrar-juego}" class="btn btn-success px-4 py-2">Nuevo Juego</a>
-            </div>
+			<ul class="nav nav-pills flex-column mb-auto">
+				<li class="nav-item mb-2">
+					<a th:href="@{/admin/lista-juegos}" class="nav-link text-white item-sidebar active"
+						style="background-color: var(--color-acento-principal);">
+						<i class="bi bi-joystick"></i> Gestión de Juegos
+					</a>
+				</li>
+				<li class="nav-item mb-2">
+					<a th:href="@{/admin/lista-categorias}" class="nav-link text-white item-sidebar">
+						<i class="bi bi-chat-left-dots-fill"></i> Categorias
+					</a>
+				</li>
+				<li class="nav-item mb-2">
+					<a th:href="@{/admin/lista-usuarios}" class="nav-link text-white">
+						<i class="bi bi-people-fill"></i> Usuarios
+					</a>
+				</li>
+				<li class="nav-item mb-2">
+					<a th:href="@{/admin/mensaje}" class="nav-link text-white item-sidebar">
+						<i class="bi bi-chat-left-dots-fill"></i> Mensajes
+					</a>
+				</li>
+			</ul>
+		</div>
 
-            <div class="card card-admin p-4 shadow-lg">
-                <table id="tbl-juegos" class="table table-hover align-middle">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>Imagen</th>
-                            <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Categoría</th>
-                            <th>Precio</th>
-                            <th class="text-center">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="juego : ${lstJuegos}">
-                            <td>
-                                <img th:src="@{'/uploads/ImgJuegos/' + ${juego.imagen}}" 
-                                     style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;">
-                            </td>
-                            <td th:text="${juego.idJuegos}">1</td>
-                            <td th:text="${juego.descripcion}">Nombre</td>
-                            <td th:text="${juego.categoria.descripcion}">Categoria</td>
-                            <td th:text="'S/. ' + ${#numbers.formatDecimal(juego.precio, 1, 2)}">0.00</td>
-                            <td class="text-center">
-                                <a th:href="@{'/admin/modificar-juego/' + ${juego.idJuegos}}" class="btn btn-sm btn-primary">Editar</a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-	<script>
-	    $(document).ready(function () {
-	        $('#tbl-juegos').DataTable({
-				language: {
-	                "lengthMenu": "Mostrar _MENU_ juegos",
-	                "zeroRecords": "No se encontraron juegos",
-	                "info": "Mostrando _END_ juegos de _TOTAL_ ",
-	                "infoEmpty": "Mostrando 0 juegos",
-	                "infoFiltered": "(filtrado de _MAX_ juegos en total)",
-	                "search": "Buscar Juego:",
-	                "paginate": {
-	                    "first": "Primero",
-	                    "last": "Último",
-	                    "next": "Siguiente",
-	                    "previous": "Anterior"
-	                }
-	            },
-	            pageLength: 10,
-	            lengthMenu: [5, 10, 20, 50],
-	            ordering: true,
-	            responsive: true,
-	            columnDefs: [
-	                { targets: [0, 5], orderable: false }
-	            ]
-	        });
-	    });
-	</script>
-</div>
+		<div class="flex-grow-1 p-4 w-100">
+			<div class="container">
+				<div class="d-flex justify-content-between align-items-center mb-4">
+					<h2 class="mb-0">Gestión de Juegos</h2>
+					<a th:href="@{/admin/registrar-juego}" class="btn btn-success px-4 py-2">Nuevo Juego</a>
+				</div>
+
+				<div class="row mb-3">
+					<fieldset class="border border-2 border-dark pb-2">
+						<legend class="float-none w-auto px-2">Filtro</legend>
+						<form th:action="@{/admin/filtra-juegos}" method="get" th:object="${filter_j}">
+							<div class="row align-items-end">
+								<div class="col-md-3">
+									<label for="idCategoria" class="form-label">Categoría</label>
+									<div class="input-group">
+										<span class="input-group-text"><i
+												class="fa-solid fa-chalkboard-user"></i></span>
+										<select class="form-select" th:field="*{idCategoria}">
+											<option value="">--Todos--</option>
+											<option th:each="cat : ${categorias}" th:value="${cat.idCategoria}"
+												th:text="${cat.descripcion}"></option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-3">
+								</div>
+								<div class="col-md-6 text-end">
+									<button type="submit" class="btn btn-outline-dark">
+										<i class="fa-solid fa-binoculars"></i> Buscar
+									</button>
+									<a th:href="@{/admin/lista-juegos}" class="btn btn-outline-secondary">
+										<i class="fa-solid fa-broom"></i> Limpiar
+									</a>
+								</div>
+							</div>
+						</form>
+					</fieldset>
+				</div>
+
+				<div class="card card-admin p-4 shadow-lg">
+					<table id="tbl-juegos" class="table table-hover align-middle">
+						<thead class="table-dark">
+							<tr>
+								<th>Imagen</th>
+								<th>ID</th>
+								<th>Nombre</th>
+								<th>Categoría</th>
+								<th>Precio</th>
+								<th class="text-center">Acciones</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="juego : ${lstJuegos}">
+								<td>
+									<img th:src="@{'/uploads/ImgJuegos/' + ${juego.imagen}}"
+										style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;">
+								</td>
+								<td th:text="${juego.idJuegos}">1</td>
+								<td th:text="${juego.descripcion}">Nombre</td>
+								<td th:text="${juego.categoria.descripcion}">Categoria</td>
+								<td th:text="'S/. ' + ${#numbers.formatDecimal(juego.precio, 1, 2)}">0.00</td>
+								<td class="text-center">
+									<a th:href="@{'/admin/modificar-juego/' + ${juego.idJuegos}}"
+										class="btn btn-sm btn-primary">Editar</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<script>
+			$(document).ready(function () {
+				$('#tbl-juegos').DataTable({
+					language: {
+						"lengthMenu": "Mostrar _MENU_ juegos",
+						"zeroRecords": "No se encontraron juegos",
+						"info": "Mostrando _END_ juegos de _TOTAL_ ",
+						"infoEmpty": "Mostrando 0 juegos",
+						"infoFiltered": "(filtrado de _MAX_ juegos en total)",
+						"search": "Buscar Juego:",
+						"paginate": {
+							"first": "Primero",
+							"last": "Último",
+							"next": "Siguiente",
+							"previous": "Anterior"
+						}
+					},
+					pageLength: 10,
+					lengthMenu: [5, 10, 20, 50],
+					ordering: true,
+					responsive: true,
+					columnDefs: [
+						{targets: [0, 5], orderable: false}
+					]
+				});
+			});
+		</script>
+	</div>
 
 </body>
+
 </html>

@@ -69,13 +69,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>2026-06-18</td>
-                                <td>Juan Pérez</td>
-                                <td><a>juan@ejemplo.com</a></td>
-                                <td>987654321</td>
-                                <td>Mensaje de prueba, el que haga esto, cambiame</td>
+                            <tr th:each="mensajes : ${lstMensajes}">
+                                <td th:text="${mensajes.idMensaje}"></td>
+                                <td th:text="${mensajes.fechaEnvio}"></td>
+                                <td th:text="${mensajes.cliente.nombres} + ' ' + ${mensajes.cliente.apellidos}"></td>
+                                <td th:text="${mensajes.cliente.correo}"><a></a></td>
+                                <td th:text="${mensajes.cliente.telefono}"></td>
+                                <td th:text="${mensajes.mensaje}"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -86,31 +86,31 @@
     </div>
 
 	<script>
-		    $(document).ready(function () {
-		        $('#tbl-mensaje').DataTable({
-					language: {
-		                "lengthMenu": "Mostrar _MENU_ mensajes",
-		                "zeroRecords": "No se encontraron el mensaje",
-		                "info": "Mostrando _END_ mensajes de _TOTAL_ ",
-		                "infoEmpty": "Mostrando 0 mensajes",
-		                "infoFiltered": "(filtrado de _MAX_ mensajes en total)",
-		                "search": "Buscar mensaje:",
-		                "paginate": {
-		                    "first": "Primero",
-		                    "last": "Último",
-		                    "next": "Siguiente",
-		                    "previous": "Anterior"
-		                }
-		            },
-		            pageLength: 10,
-		            lengthMenu: [10, 20, 50],
-		            ordering: true,
-		            responsive: true,
-		            columnDefs: [
-		                { targets: [0, 5], orderable: false }
-		            ]
-		        });
-		    });
-		</script>
+	    $(document).ready(function () {
+	        $('#tbl-mensaje').DataTable({
+				language: {
+	                "lengthMenu": "Mostrar _MENU_ mensajes",
+	                "zeroRecords": "No se encontraron el mensaje",
+	                "info": "Mostrando _END_ mensajes de _TOTAL_ ",
+	                "infoEmpty": "Mostrando 0 mensajes",
+	                "infoFiltered": "(filtrado de _MAX_ mensajes en total)",
+	                "search": "Buscar mensaje:",
+	                "paginate": {
+	                    "first": "Primero",
+	                    "last": "Último",
+	                    "next": "Siguiente",
+	                    "previous": "Anterior"
+	                }
+	            },
+	            pageLength: 10,
+	            lengthMenu: [10, 20, 50],
+	            ordering: true,
+	            responsive: true,
+	            columnDefs: [
+	                { targets: [0, 5], orderable: false }
+	            ]
+	        });
+	    });
+	</script>
 </body>
 </html>

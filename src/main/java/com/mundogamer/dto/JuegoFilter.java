@@ -4,7 +4,5 @@ import lombok.Data;
 
 @Data
 public class JuegoFilter {
-
 	private String idCategoria;
-	private String nombre;
 }

@@ -18,15 +18,10 @@ public interface JuegoRepository extends JpaRepository<Juego, Integer> {
 	@Query("""
             select j
             from Juego as j
-            where 
-                (j.categoria.idCategoria = :idCategoria or :idCategoria is null or :idCategoria = '')
-                and
-                (j.descripcion like concat('%', :nombre, '%') or :nombre is null or :nombre = '')
-            order by j.descripcion asc
+            where j.categoria.idCategoria = :idCategoria
             """)
     List<Juego> findAllByFilters(
-        @Param("idCategoria") String idCategoria,
-        @Param("nombre") String nombre
+        @Param("idCategoria") String idCategoria
     );
 	
 }

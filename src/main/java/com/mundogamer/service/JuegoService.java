@@ -22,13 +22,7 @@ public class JuegoService {
 	}
 	
 	public List<Juego> search(JuegoFilter filter) {
-        boolean sinCategoria = (filter == null || filter.getIdCategoria() == null || filter.getIdCategoria().isEmpty());
-        boolean sinNombre = (filter == null || filter.getNombre() == null || filter.getNombre().isEmpty());
-        
-        if (sinCategoria && sinNombre) {
-            return getAll();
-        }
-        return juegoRepository.findAllByFilters(filter.getIdCategoria(), filter.getNombre());
+		return juegoRepository.findAllByFilters(filter.getIdCategoria());
     }
 	
 	public Juego getById(Integer id) {

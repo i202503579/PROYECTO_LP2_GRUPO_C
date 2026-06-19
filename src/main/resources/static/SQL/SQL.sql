@@ -130,6 +130,7 @@ INSERT INTO Clientes VALUES('75349812','Mendoza','Jorge Andres','32547811','Av. 
 INSERT INTO Clientes VALUES('81234590','Paredes','Diana Patricia','45662345','Jr. Amazonas 321','912340987','2002-08-03','F','diana.p@gmail.com','dpat02','1');
 INSERT INTO Clientes VALUES('70234891','Salazar','Kevin Joel','12875554','Calle Central 900','95467090','1998-12-30','M','kevin.s@gmail.com','ks123','1');
 INSERT INTO Clientes VALUES('74891230','Hidalgo','Monica Rene','82934419','Av. Colonial 450','974534423','1994-06-15','F','monica.h@gmail.com','mh94','1');
+INSERT INTO Clientes VALUES('74891120','Sanchez','Renato','825454519','Av. WAZAAA','9745454823','1998-07-05','F','sanchez@gmail.com','mas78','0');
 SELECT * FROM Clientes;
 
 -- Tabla : Ventas
@@ -175,3 +176,14 @@ CREATE TABLE Mensajes (
     FOREIGN KEY (IdCliente) REFERENCES Clientes (IdCliente)
 );
 
+INSERT INTO Mensajes (IdCliente, TextoMensaje, FechaEnvio, Estado) VALUES
+('78451236', 'WAZAAAAAAAAAAAAAAA', '2026-06-15 10:30:00', '1'),
+('81549273', 'Mi pedido llegó en perfectas condiciones', '2026-06-16 14:20:00', '1'),
+('72915487', '¿Tienen disponibilidad del juego "God of War"?', '2026-06-17 09:15:00', '1'),
+('80451299', 'Quiero saber si hacen envíos a provincias', '2026-06-18 11:45:00', '1'),
+('72134588', 'El producto no coincide con la descripción', '2026-06-19 16:30:00', '1'),
+('79541230', 'Me encantó la atención al cliente', '2026-06-20 08:00:00', '1'),
+('75349812', '¿Puedo cambiar la fecha de entrega?', '2026-06-20 12:10:00', '1'),
+('81234590', 'Ya realicé el pago, ¿cuándo me confirman?', '2026-06-21 09:30:00', '1'),
+('70234891', 'El juego llegó dañado, necesito reemplazo', '2026-06-21 18:20:00', '1'),
+('74891230', 'Gracias por la rápida respuesta', '2026-06-22 10:00:00', '1');
