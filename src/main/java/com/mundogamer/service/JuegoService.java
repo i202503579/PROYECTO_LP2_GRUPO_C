@@ -22,8 +22,11 @@ public class JuegoService {
 	}
 	
 	public List<Juego> search(JuegoFilter filter) {
-		return juegoRepository.findAllByFilters(filter.getIdCategoria());
-    }
+		if (filter == null || filter.getIdCategoria() == null || filter.getIdCategoria().trim().isEmpty()) {
+	        return juegoRepository.findAllByOrderByDescripcionAsc();
+	    }
+	    return juegoRepository.findAllByFilters(filter.getIdCategoria());
+	}
 	
 	public Juego getById(Integer id) {
 	    return juegoRepository.findById(id).orElse(null);

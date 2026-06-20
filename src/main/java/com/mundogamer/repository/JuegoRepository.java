@@ -18,8 +18,8 @@ public interface JuegoRepository extends JpaRepository<Juego, Integer> {
 	@Query("""
             select j
             from Juego as j
-            where j.categoria.idCategoria = :idCategoria
-            """)
+			where (:idCategoria is null or :idCategoria = '' or j.categoria.idCategoria = :idCategoria)            
+			""")
     List<Juego> findAllByFilters(
         @Param("idCategoria") String idCategoria
     );

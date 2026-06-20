@@ -131,6 +131,8 @@ INSERT INTO Clientes VALUES('81234590','Paredes','Diana Patricia','45662345','Jr
 INSERT INTO Clientes VALUES('70234891','Salazar','Kevin Joel','12875554','Calle Central 900','95467090','1998-12-30','M','kevin.s@gmail.com','ks123','1');
 INSERT INTO Clientes VALUES('74891230','Hidalgo','Monica Rene','82934419','Av. Colonial 450','974534423','1994-06-15','F','monica.h@gmail.com','mh94','1');
 INSERT INTO Clientes VALUES('74891120','Sanchez','Renato','825454519','Av. WAZAAA','9745454823','1998-07-05','F','sanchez@gmail.com','mas78','0');
+INSERT INTO Clientes VALUES('80463819','Apellido','Admin','567894235','Av. Admin','956894369','2026-01-01','F','admin@gmail.com','admin','1');
+
 SELECT * FROM Clientes;
 
 -- Tabla : Ventas
