@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Registrar Usuario</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+</head>
+
+<body>
+
+<div class="container mt-5">
+    <div class="card card-admin p-4 shadow-lg">
+
+        <h1 class="text-center text-white mb-4">Registrar Usuario</h1>
+
+        <form th:action="@{/admin/guardar-usuario}" th:object="${cliente}" method="post">
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label text-white">ID Cliente</label>
+                    <input type="text" class="form-control" th:field="*{idCliente}" readonly>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label text-white">Estado</label>
+                    <select class="form-select" th:field="*{estado}">
+                        <option value="1">Activo</option>
+                        <option value="0">Bloqueado / Inactivo</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label text-white">Nombres</label>
+                    <input type="text" class="form-control" th:field="*{nombres}" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label text-white">Apellidos</label>
+                    <input type="text" class="form-control" th:field="*{apellidos}" required>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label text-white">DNI</label>
+                    <input type="text" class="form-control" th:field="*{dni}" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label text-white">Teléfono</label>
+                    <input type="text" class="form-control" th:field="*{telefono}" required>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label text-white">Correo</label>
+                    <input type="email" class="form-control" th:field="*{correo}" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label text-white">Contraseña</label>
+                    <input type="password" class="form-control" th:field="*{password}" required>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label text-white">Sexo</label>
+                    <select class="form-select" th:field="*{sexo}">
+                        <option value="M">Masculino</option>
+                        <option value="F">Femenino</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label text-white">Fecha de Nacimiento</label>
+                    <input type="date" class="form-control" th:field="*{fechaNacimiento}" required>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <label class="form-label text-white">Dirección</label>
+                    <input type="text" class="form-control" th:field="*{direccion}" required>
+                </div>
+            </div>
+
+            <hr class="border-secondary mb-4">
+
+            <div class="d-flex justify-content-end">
+                <a th:href="@{/admin/lista-usuarios}" class="btn btn-outline-light me-2">
+                    Cancelar
+                </a>
+                <button type="submit" class="btn btn-success">
+                    Registrar
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+</body>
+</html>

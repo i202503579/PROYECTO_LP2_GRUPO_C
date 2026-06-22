@@ -12,7 +12,7 @@
     <div class="container mt-5">
         <div class="card card-admin p-4">
             <h1 class="text-center text-white mb-4" th:text="|Modificar Juego #${juego.idJuegos}|"></h1>
-            <form th:action="@{/admin/modificar-categoria}" th:object="${juego}" method="post" enctype="multipart/form-data">
+            <form th:action="@{/admin/registrar-juego}" th:object="${juego}" method="post" enctype="multipart/form-data">
                 
                 <input type="hidden" th:field="*{idJuegos}" />
                 <input type="hidden" th:field="*{imagen}" /> <div class="row g-3">

@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.mundogamer.dto.ClienteFilter;
 import com.mundogamer.dto.JuegoFilter;
 import com.mundogamer.model.Categoria;
+import com.mundogamer.model.Cliente;
 import com.mundogamer.model.Juego;
 import com.mundogamer.service.CategoriaService;
 import com.mundogamer.service.ClienteService;
@@ -189,11 +190,35 @@ public class AdminController {
 	    return "admin/lista-usuarios";
 	}
 	
-	@GetMapping("modificar-usuario")
-	public String modificarUsuario(Model model) {
-	    
+	@GetMapping("modificar-usuario/{id}")
+	public String modificarUsuario(@PathVariable String id, Model model) {
+
+	    Cliente cliente = clienteService.getOne(id);
+
+	    if (cliente == null) {
+	        return "redirect:/admin/lista-usuarios";
+	    }
+
+	    model.addAttribute("cliente", cliente);
+
 	    return "admin/modificar-usuario";
 	}
 	
-	
+	@PostMapping("guardar-usuario")
+	public String guardarUsu(@ModelAttribute Cliente cliente, Model model, RedirectAttributes flash) {
+	    var response = clienteService.save(cliente);
+	    if (!response.success()) {
+	        model.addAttribute("cliente", cliente);
+	        model.addAttribute("Alert", Alert.sweetAlertError(response.mensaje()));
+	        return "admin/modificar-usuario";
+	    }
+	    var toast = Alert.sweetToast(response.mensaje(), "success", 5000);
+	    flash.addFlashAttribute("Alert", toast);
+	    return "redirect:/admin/lista-usuarios";
+	}
+	@GetMapping("registrar-usuario")
+	public String NuevoUsuario(Model model) {
+		model.addAttribute("cliente", new Cliente());
+		return "admin/registrar-usuario";
+	}
 }

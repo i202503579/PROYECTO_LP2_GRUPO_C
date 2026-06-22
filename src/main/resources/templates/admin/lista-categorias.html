@@ -108,6 +108,8 @@
         });
     </script>
 </div>
-
+<div th:if="${Alert != null}">
+    <div th:utext="${Alert}"></div>
+</div>
 </body>
 </html>
