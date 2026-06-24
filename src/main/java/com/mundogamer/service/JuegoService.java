@@ -2,6 +2,8 @@ package com.mundogamer.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.mundogamer.dto.JuegoFilter;
@@ -18,23 +20,34 @@ public class JuegoService {
 	private final JuegoRepository juegoRepository;
 	
 	public List<Juego> getAll(){
-		return juegoRepository.findAllByOrderByDescripcionAsc();
+		return juegoRepository.findAll();
 	}
 	
-	public List<Juego> search(JuegoFilter filter) {
+	public Page<Juego> search(JuegoFilter filter, Pageable pageable) {
 		if (filter == null || filter.getIdCategoria() == null || filter.getIdCategoria().trim().isEmpty()) {
-	        return juegoRepository.findAllByOrderByDescripcionAsc();
+	        return juegoRepository.findAllByOrderByDescripcionAsc(pageable);
 	    }
-	    return juegoRepository.findAllByFilters(filter.getIdCategoria());
+	    return juegoRepository.findAllByFilters(filter.getIdCategoria(), pageable);
 	}
 	
 	public Juego getById(Integer id) {
 	    return juegoRepository.findById(id).orElse(null);
 	}
-/* Administrador */
+	
+	
+// Administrador
 	
 	public List<Juego> getAllAdmin() {
 	    return juegoRepository.findAllByOrderByIdJuegosDesc();
+	}
+	
+	public List<Juego> search(JuegoFilter filter) {
+
+	    if (filter == null || filter.getIdCategoria() == null || filter.getIdCategoria().trim().isEmpty()) {
+	        return juegoRepository.findAll();
+	    }
+
+	    return juegoRepository.findAllByFilters(filter.getIdCategoria(), Pageable.unpaged()) .getContent();
 	}
 	
 	public ResultadoResponse create(Juego juego) {

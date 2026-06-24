@@ -114,24 +114,25 @@ CREATE TABLE Clientes(
     Correo VARCHAR(50) NOT NULL,
     Password VARCHAR(255) NOT NULL,
     Estado CHAR(1) NOT NULL,
+    Rol VARCHAR(20) NOT NULL,
     PRIMARY KEY(IdCliente),
     CHECK(Sexo IN ('M','F')),
     CHECK(Estado IN ('0','1'))
 );
 
 -- Insertar filas en la tabla Clientes
-INSERT INTO Clientes VALUES('78451236','Gonzales','Marco Antonio','45258695','Av. Los Olivos 123','995587456','1998-05-14','M','marco.g@gmail.com','pass123','1');
-INSERT INTO Clientes VALUES('81549273','Rojas','Ana Lucia','12453425','Jr. Lima 450','945781020','2000-11-02','F','ana.rojas@gmail.com','ana2000','1');
-INSERT INTO Clientes VALUES('72915487','Fernandez','Luis Alberto','78563225','Calle Sol 233','930450760','1995-03-22','M','luisf95@gmail.com','luisA95','1');
-INSERT INTO Clientes VALUES('80451299','Torres','María Fernanda','65763467','Av. Arequipa 670','902546803','1999-07-28','F','mfernanda@gmail.com','mf1234','1');
-INSERT INTO Clientes VALUES('72134588','Ramirez','Carlos Daniel','69695847','Jr. Progreso 120','953697221','2001-09-10','M','c.ramirez@gmail.com','ram123','1');
-INSERT INTO Clientes VALUES('79541230','Castillo','Valeria Sofia','20526897','Calle Luna 876','900002545','1997-02-05','F','val.castillo@gmail.com','vs777','1');
-INSERT INTO Clientes VALUES('75349812','Mendoza','Jorge Andres','32547811','Av. Grau 540','954255685','1996-10-18','M','jorge.m@gmail.com','jm96','1');
-INSERT INTO Clientes VALUES('81234590','Paredes','Diana Patricia','45662345','Jr. Amazonas 321','912340987','2002-08-03','F','diana.p@gmail.com','dpat02','1');
-INSERT INTO Clientes VALUES('70234891','Salazar','Kevin Joel','12875554','Calle Central 900','95467090','1998-12-30','M','kevin.s@gmail.com','ks123','1');
-INSERT INTO Clientes VALUES('74891230','Hidalgo','Monica Rene','82934419','Av. Colonial 450','974534423','1994-06-15','F','monica.h@gmail.com','mh94','1');
-INSERT INTO Clientes VALUES('74891120','Sanchez','Renato','825454519','Av. WAZAAA','9745454823','1998-07-05','F','sanchez@gmail.com','mas78','0');
-INSERT INTO Clientes VALUES('80463819','Apellido','Admin','567894235','Av. Admin','956894369','2026-01-01','F','admin@gmail.com','admin','1');
+INSERT INTO Clientes VALUES('78451236','Gonzales','Marco Antonio','45258695','Av. Los Olivos 123','995587456','1998-05-14','M','marco.g@gmail.com','pass123','1', 'CLIENTE');
+INSERT INTO Clientes VALUES('81549273','Rojas','Ana Lucia','12453425','Jr. Lima 450','945781020','2000-11-02','F','ana.rojas@gmail.com','ana2000','1', 'CLIENTE');
+INSERT INTO Clientes VALUES('72915487','Fernandez','Luis Alberto','78563225','Calle Sol 233','930450760','1995-03-22','M','luisf95@gmail.com','luisA95','1', 'CLIENTE');
+INSERT INTO Clientes VALUES('80451299','Torres','María Fernanda','65763467','Av. Arequipa 670','902546803','1999-07-28','F','mfernanda@gmail.com','mf1234','1', 'CLIENTE');
+INSERT INTO Clientes VALUES('72134588','Ramirez','Carlos Daniel','69695847','Jr. Progreso 120','953697221','2001-09-10','M','c.ramirez@gmail.com','ram123','1', 'CLIENTE');
+INSERT INTO Clientes VALUES('79541230','Castillo','Valeria Sofia','20526897','Calle Luna 876','900002545','1997-02-05','F','val.castillo@gmail.com','vs777','1', 'CLIENTE');
+INSERT INTO Clientes VALUES('75349812','Mendoza','Jorge Andres','32547811','Av. Grau 540','954255685','1996-10-18','M','jorge.m@gmail.com','jm96','1', 'CLIENTE');
+INSERT INTO Clientes VALUES('81234590','Paredes','Diana Patricia','45662345','Jr. Amazonas 321','912340987','2002-08-03','F','diana.p@gmail.com','dpat02','1', 'CLIENTE');
+INSERT INTO Clientes VALUES('70234891','Salazar','Kevin Joel','12875554','Calle Central 900','95467090','1998-12-30','M','kevin.s@gmail.com','ks123','1', 'CLIENTE');
+INSERT INTO Clientes VALUES('74891230','Hidalgo','Monica Rene','82934419','Av. Colonial 450','974534423','1994-06-15','F','monica.h@gmail.com','mh94','1', 'CLIENTE');
+INSERT INTO Clientes VALUES('74891120','Sanchez','Renato','825454519','Av. WAZAAA','9745454823','1998-07-05','F','sanchez@gmail.com','mas78','0', 'CLIENTE');
+INSERT INTO Clientes VALUES('80463819','Istrador','Admin','567894235','Av. Admin','956894369','2026-01-01','F','admin@gmail.com','admin','1', 'ADMIN');
 
 SELECT * FROM Clientes;
 

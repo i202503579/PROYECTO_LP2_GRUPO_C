@@ -52,5 +52,8 @@ public class Cliente {
 	
 	@Column(name = "Estado")
 	private String estado;
+	
+	@Column(name = "Rol")
+	private String rol;
 }
 

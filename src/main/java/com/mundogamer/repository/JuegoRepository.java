@@ -2,6 +2,8 @@ package com.mundogamer.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -12,7 +14,7 @@ import com.mundogamer.model.Juego;
 @Repository
 public interface JuegoRepository extends JpaRepository<Juego, Integer> {
 
-	List<Juego> findAllByOrderByDescripcionAsc();
+	Page<Juego> findAllByOrderByDescripcionAsc(Pageable pageable);
 	List<Juego> findAllByOrderByIdJuegosDesc();
 	
 	@Query("""
@@ -20,8 +22,8 @@ public interface JuegoRepository extends JpaRepository<Juego, Integer> {
             from Juego as j
 			where (:idCategoria is null or :idCategoria = '' or j.categoria.idCategoria = :idCategoria)            
 			""")
-    List<Juego> findAllByFilters(
-        @Param("idCategoria") String idCategoria
-    );
-	
+	Page<Juego> findAllByFilters(
+	        @Param("idCategoria") String idCategoria,
+	        Pageable pageable
+	);	
 }

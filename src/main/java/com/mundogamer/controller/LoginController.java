@@ -20,9 +20,13 @@ public class LoginController {
 	private final AutenticacionService autenticacionService;
 
 	@PostMapping("/login")
-	public String procesarLogin(@RequestParam String email, @RequestParam String password, HttpSession session,
-			RedirectAttributes flash) {
-
+	public String procesarLogin(
+				@RequestParam String email, 
+				@RequestParam String password, 
+				HttpSession session,
+				RedirectAttributes flash
+			) 
+	{
 		AutenticacionFilter filter = new AutenticacionFilter();
 		filter.setEmail(email);
 		filter.setPassword(password);
@@ -36,9 +40,13 @@ public class LoginController {
 
 		session.setAttribute("usuario", cliente);
 
-		flash.addFlashAttribute("toast",
-				Alert.sweetToast("¡Bienvenido " + cliente.getNombres() + "!", "success", 5000));
-		return "redirect:/producto/inicio";
+		flash.addFlashAttribute("toast", Alert.sweetToast("¡Bienvenido " + cliente.getNombres() + "!", "success", 5000));
+		
+	    if ("ADMIN".equals(cliente.getRol())) {
+	        return "redirect:/admin/lista-juegos";
+	    }
+
+	    return "redirect:/producto/inicio";
 	}
 
 	@PostMapping("/logout")
