@@ -100,3 +100,32 @@ body {
     .sexo-option input {
         margin-right: 5px;
     }
+	
+	        .marcoRegistro {
+	            background-color: rgba(0,0,0,0.2);
+	            border: 1px solid rgb(242, 64, 93); 
+	            padding: 40px;
+	            border-radius: 10px;
+	            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+	            max-width: 800px;
+	            margin: 40px auto;
+	            color: white;
+	        }
+	        
+	        .btn-tema {
+	            background-color: rgb(242, 64, 93);
+	            color: white;
+	            border: none;
+	            transition: all 0.3s ease;
+	        }
+	        
+	        .btn-tema:hover {
+	            background-color: rgb(200, 45, 70);
+	            color: white;
+	            transform: translateY(-2px);
+	            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+	        }
+
+	        .texto-acento {
+	            color: rgb(242, 64, 93);
+	        }

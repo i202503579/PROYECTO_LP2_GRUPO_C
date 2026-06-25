@@ -1,6 +1,11 @@
 package com.mundogamer.controller;
 
+import java.util.UUID;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -8,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.mundogamer.dto.AutenticacionFilter;
 import com.mundogamer.model.Cliente;
 import com.mundogamer.service.AutenticacionService;
+import com.mundogamer.service.ClienteService;
 import com.mundogamer.util.Alert;
 
 import jakarta.servlet.http.HttpSession;
@@ -18,6 +24,7 @@ import lombok.RequiredArgsConstructor;
 public class LoginController {
 
 	private final AutenticacionService autenticacionService;
+	private final ClienteService clienteService;
 
 	@PostMapping("/login")
 	public String procesarLogin(
@@ -48,7 +55,31 @@ public class LoginController {
 
 	    return "redirect:/producto/inicio";
 	}
+	
+	@GetMapping("/registro")
+    public String mostrarRegistro(Model model) {
+        model.addAttribute("cliente", new Cliente());
+        return "producto/registro";
+    }
+	
+	@PostMapping("/registrar-cuenta")
+	public String procesarRegistro(@ModelAttribute Cliente cliente, RedirectAttributes flash) {
+	    try {
+	        cliente.setRol("CLIENTE"); 
+	        cliente.setEstado("1");
 
+	        clienteService.save(cliente); 
+	        
+	        flash.addFlashAttribute("toast", Alert.sweetToast("¡Cuenta creada con éxito! Ya puedes iniciar sesión.", "success", 5000));
+	        return "redirect:/producto/inicio"; 
+	        
+	    } catch (Exception e) {
+	    	e.printStackTrace();
+	        flash.addFlashAttribute("error", "Ocurrió un error al registrar la cuenta. Verifica tus datos.");
+	        return "redirect:/registro";
+	    }
+	}
+	
 	@PostMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();

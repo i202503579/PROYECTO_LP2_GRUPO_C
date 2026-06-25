@@ -28,7 +28,7 @@
                 <p><strong>ID:</strong> <span th:text="${juego.idJuegos}">0</span></p>
                 <p><strong>Precio:</strong> S/. <span th:text="${#numbers.formatDecimal(juego.precio, 1, 2)}">0.00</span></p>
 
-                <form method="post" class="mt-4">
+                <form method="post" th:action="@{/carrito/agregar}" class="mt-4">
                     <input type="hidden" name="id" th:value="${juego.idJuegos}">
                     
                     <label class="form-label"><strong>Cantidad</strong></label>

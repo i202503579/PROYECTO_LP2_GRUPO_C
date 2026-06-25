@@ -89,14 +89,23 @@
 					                    <input type="date" class="form-control" th:field="*{fechaNacimiento}" required>
 					                </div>
 					            </div>
-
-					            <div class="row mb-4">
+								<div class="row mb-3">
+					            <div class="col-md-6">
 					                <div class="col-md-12">
 					                    <label class="form-label text-white">Dirección</label>
 					                    <input type="text" class="form-control" th:field="*{direccion}" required>
 					                </div>
 					            </div>
-
+	
+								<div class="col-md-6">
+								    <label class="form-label text-white">Rol de Usuario</label>
+								    <select class="form-select" th:field="*{rol}" required>
+								        <option value="" disabled selected>Seleccione un rol</option>
+								        <option value="CLIENTE">Cliente</option>
+								        <option value="ADMIN">Administrador</option>
+								    </select>
+								</div>
+								</div>
 					            <hr class="border-secondary mb-4">
 
 					            <div class="d-flex justify-content-end">

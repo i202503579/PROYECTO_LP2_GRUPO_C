@@ -2,7 +2,7 @@ package com.mundogamer.model;
 
 import java.time.LocalDate;
 
-
+import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -38,6 +38,7 @@ public class Cliente {
 	@Column(name = "Telefono")
 	private String telefono;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "FechaNacimiento")
 	private LocalDate fechaNacimiento;
 	

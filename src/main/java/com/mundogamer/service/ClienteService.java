@@ -44,7 +44,7 @@ public class ClienteService {
 	
 	public ResultadoResponse save(Cliente cliente) {
 	    try {
-	        if (clienteRepository.existsById(cliente.getIdCliente())) {
+	    	if (cliente.getIdCliente() != null && clienteRepository.existsById(cliente.getIdCliente())) {
 	            
 	            clienteRepository.save(cliente);
 	        } else {

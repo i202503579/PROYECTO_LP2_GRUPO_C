@@ -19,5 +19,7 @@ public class MensajeService {
 		return mensajeRepository.findAllByOrderByMensajeAsc();
 	}
 
-	
+	public Mensaje save(Mensaje mensaje) {
+		return mensajeRepository.save(mensaje);
+	}
 }

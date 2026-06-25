@@ -1,5 +1,7 @@
 package com.mundogamer.controller;
 
+import java.time.LocalDate;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -7,14 +9,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mundogamer.dto.JuegoFilter;
+import com.mundogamer.model.Cliente;
 import com.mundogamer.model.Juego;
+import com.mundogamer.model.Mensaje;
 import com.mundogamer.service.CategoriaService;
 import com.mundogamer.service.JuegoService;
+import com.mundogamer.service.MensajeService;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -24,6 +32,7 @@ public class ProductoController {
 
 	private final JuegoService juegoService;
 	private final CategoriaService categoriaService;
+	private final MensajeService mensajeService;
 	
 	@GetMapping("inicio")
 	public String inicio() {
@@ -36,9 +45,33 @@ public class ProductoController {
 	}
 	
 	@GetMapping("/contactanos")
-    public String Contacto() {
+    public String Contacto(HttpSession session, Model model) {
+		Cliente clienteLogueado = (Cliente) session.getAttribute("usuario");
+		model.addAttribute("usuarioLogueado", clienteLogueado);
         return "/producto/contactanos"; 
     }
+	
+	@PostMapping("/enviar-mensaje")
+	public String enviarMensaje(@RequestParam ("mensaje") String textoMensaje, HttpSession session, RedirectAttributes flash) {
+		
+		Cliente usuarioLogueado = (Cliente) session.getAttribute("usuario");
+
+		if (usuarioLogueado == null) {
+			return "redirect:/producto/contactanos";
+		}
+		
+		Mensaje nuevoMensaje = new Mensaje();
+		nuevoMensaje.setCliente(usuarioLogueado);
+		nuevoMensaje.setMensaje(textoMensaje);
+		nuevoMensaje.setFechaEnvio(LocalDate.now());
+		nuevoMensaje.setEstado("P");
+
+		mensajeService.save(nuevoMensaje);
+
+		flash.addFlashAttribute("mensajeExito", "¡Tu mensaje ha sido enviado con éxito!");
+		
+		return "redirect:/producto/contactanos";
+	}
 	
 	@GetMapping("/juegos")
 	public String listaJuegos(@ModelAttribute JuegoFilter filter, @RequestParam(defaultValue = "0") int page, Model model) {

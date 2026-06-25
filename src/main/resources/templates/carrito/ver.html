@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/carrito.css}">
+</head>
+<body style="background-color: rgb(69, 69, 155);">
+    <div class="container mt-5">
+        <div class="carrito-container">
+            <h2 class="mb-4">Tu Carrito de Compras</h2>
+            <table class="table table-carrito">
+                <thead>
+                    <tr><th>Juego</th><th>Precio</th><th>Cantidad</th><th>Subtotal</th><th>Acción</th></tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item : ${session.carrito}">
+                        <td th:text="${item.descripcion}"></td>
+                        <td th:text="'S/. ' + ${item.precio}"></td>
+                        <td th:text="${item.cantidad}"></td>
+                        <td th:text="'S/. ' + ${item.precio * item.cantidad}"></td>
+                        <td>
+                            <form th:action="@{/carrito/eliminar}" method="post">
+                                <input type="hidden" name="id" th:value="${item.idJuego}">
+                                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="text-end">
+                <a th:href="@{/carrito/confirmar}" class="btn btn-pagar btn-lg">Ir a Pagar</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

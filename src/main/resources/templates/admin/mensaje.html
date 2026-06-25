@@ -19,7 +19,7 @@
     <div class="d-flex" style="min-height: 100vh;">
 
             <div class="sidebar p-3 d-flex flex-column" style="width: 250px; background-color: rgba(0, 0, 0, 0.3);">
-        <a href="#" class="text-white text-decoration-none text-center mb-4 mt-2">
+        <a th:href="@{/}" class="text-white text-decoration-none text-center mb-4 mt-2">
             <h3 style="color: var(--color-acento-principal); font-weight: bold;">MundoGamer</h3>
             <small>Panel de Control</small>
         </a>
@@ -46,7 +46,14 @@
                 <a th:href="@{/admin/mensaje}" class="nav-link text-white item-sidebar active" style="background-color: var(--color-acento-principal);">
                     <i class="bi bi-chat-left-dots-fill"></i> Mensajes
                 </a>
-            </li>     
+            </li>   
+			<li class="nav-item mb-2 text-center">
+				<form method="post" th:action="@{/logout}">
+					<button type="submit" class="btn btn-link text-danger text-decoration-none">
+						<i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+					</button>
+				 </form>
+			</li>  
         </ul>
     </div>
 
@@ -68,16 +75,17 @@
                                 <th>Mensaje</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr th:each="mensajes : ${lstMensajes}">
-                                <td th:text="${mensajes.idMensaje}"></td>
-                                <td th:text="${mensajes.fechaEnvio}"></td>
-                                <td th:text="${mensajes.cliente.nombres} + ' ' + ${mensajes.cliente.apellidos}"></td>
-                                <td th:text="${mensajes.cliente.correo}"><a></a></td>
-                                <td th:text="${mensajes.cliente.telefono}"></td>
-                                <td th:text="${mensajes.mensaje}"></td>
-                            </tr>
-                        </tbody>
+						<tbody>
+						    <tr th:each="mensajes : ${lstMensajes}">
+						        <td th:text="${mensajes.idMensaje}"></td>
+						        <td class="text-nowrap" th:text="${mensajes.fechaEnvio}"></td>
+						        <td th:text="${mensajes.cliente.nombres} + ' ' + ${mensajes.cliente.apellidos}"></td>
+						        <td th:text="${mensajes.cliente.correo}"><a></a></td>
+						        <td th:text="${mensajes.cliente.telefono}"></td>
+						        
+						        <td class="text-break" style="min-width: 250px; max-width: 400px;" th:text="${mensajes.mensaje}"></td>
+						    </tr>
+						</tbody>
                     </table>
                 </div>
             </div>

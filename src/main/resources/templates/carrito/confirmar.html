@@ -1,0 +1,9 @@
+<div class="container mt-5 text-center">
+    <h3>¿Confirmas tu compra?</h3>
+    <p>Total a pagar: S/. <span th:text="${total}"></span></p>
+    
+    <form th:action="@{/carrito/finalizar}" method="post">
+        <button type="submit" class="btn btn-primary btn-lg">Confirmar y Pagar</button>
+        <a th:href="@{/carrito/ver}" class="btn btn-secondary">Regresar</a>
+    </form>
+</div>
