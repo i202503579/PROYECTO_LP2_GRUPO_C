@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Historial de Ventas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.2/css/dataTables.bootstrap5.css">
+    
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/2.3.2/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.3.2/js/dataTables.bootstrap5.js"></script>
+    
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+    <link rel="stylesheet" th:href="@{/css/dataTable.css}">
+</head>
+<body>
+    <div class="d-flex" style="min-height: 100vh;">
+        <div class="sidebar p-3 d-flex flex-column" style="width: 250px; background-color: rgba(0, 0, 0, 0.3);">
+            <a th:href="@{/}" class="text-white text-decoration-none text-center mb-4 mt-2">
+                <h3 style="color: var(--color-acento-principal); font-weight: bold;">MundoGamer</h3>
+                <small>Panel de Control</small>
+            </a>
+            <hr class="text-white">
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item mb-2">
+                    <a th:href="@{/admin/lista-juegos}" class="nav-link text-white item-sidebar"><i class="bi bi-joystick"></i> Gestión de Juegos</a>
+                </li>
+				<li class="nav-item mb-2">
+	                <a th:href="@{/admin/lista-categorias}" class="nav-link text-white item-sidebar">
+	                    <i class="bi bi-list-stars"></i> Categorias
+	                </a>
+	            </li>
+	            <li class="nav-item mb-2">
+	                <a th:href="@{/admin/lista-usuarios}" class="nav-link text-white">
+	                    <i class="bi bi-people-fill"></i> Usuarios
+	                </a>
+	            </li>
+	            <li class="nav-item mb-2">
+	                <a th:href="@{/admin/mensaje}" class="nav-link text-white item-sidebar">
+	                    <i class="bi bi-chat-left-dots-fill"></i> Mensajes
+	                </a>
+	            </li>
+                <li class="nav-item mb-2">
+                    <a th:href="@{/admin/lista-ventas}" class="nav-link text-white active" style="background-color: var(--color-acento-principal);"><i class="bi bi-cart-check-fill"></i> Ventas</a>
+                </li>
+				<li class="nav-item mb-2 text-center">
+					<form method="post" th:action="@{/logout}">
+						<button type="submit" class="btn btn-link text-danger text-decoration-none">
+							<i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+						</button>
+					 </form>
+				</li> 
+                </ul>
+        </div>
+
+        <div class="flex-grow-1 p-4 w-100">
+            <div class="container">
+                <h2 class="mb-4">Historial de Ventas</h2>
+                <div class="card card-admin p-4 shadow-lg">
+                    <table id="tbl-ventas" class="table table-hover align-middle">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>ID Venta</th>
+                                <th>Cliente</th>
+                                <th>Fecha</th>
+                                <th class="text-end">Monto Total</th>
+								<th class="text-center">Acciones</th> </tr>
+                            </tr>
+                        </thead>
+                        <tbody>
+							<tr th:each="v : ${lstVentas}">
+							    <td th:text="${v.idVenta}"></td>
+							    <td th:text="${v.cliente.nombres}"></td>
+							    <td th:text="${v.fechaVenta}"></td>
+							    <td class="text-end" th:text="'S/. ' + ${#numbers.formatDecimal(v.montoTotal, 1, 2)}"></td>
+							    <td class="text-center">
+							        <a th:href="@{/admin/detalle-venta/{id}(id=${v.idVenta})}" class="btn btn-sm btn-info text-white">Ver Productos</a>
+									<a th:href="@{/admin/boleta(numBol=${v.idVenta})}" target="_blank" 
+										class="btn btn-sm btn-danger"><i class="bi bi-file-pdf"></i> PDF</a>
+								</td>
+
+							</tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#tbl-ventas').DataTable({
+                language: {
+                    "search": "Buscar Venta:",
+                    "lengthMenu": "Mostrar _MENU_ ventas",
+                    "info": "Mostrando _END_ ventas de _TOTAL_",
+                    "zeroRecords": "No se encontraron ventas"
+                },
+                pageLength: 10,
+                ordering: true
+            });
+        });
+    </script>
+</body>
+</html>

@@ -64,6 +64,20 @@ public class CarritoController {
 	    return "redirect:/producto/juegos";
 	}
 	
+	@GetMapping("/confirmar")
+	public String confirmar(HttpSession session, Model model) {
+	    List<CarritoItem> carrito = (List<CarritoItem>) session.getAttribute("carrito");
+	    
+	    if (carrito == null || carrito.isEmpty()) {
+	        return "redirect:/carrito/ver";
+	    }
+
+	    double total = carrito.stream().mapToDouble(i -> i.getPrecio() * i.getCantidad()).sum();
+	    model.addAttribute("total", total);
+	    
+	    return "carrito/confirmar";
+	}
+	
 	@PostMapping("/finalizar")
     public String finalizarCompra(HttpSession session) {
         Cliente cliente = (Cliente) session.getAttribute("usuario");
@@ -82,6 +96,6 @@ public class CarritoController {
         if (carrito != null) {
             carrito.removeIf(item -> item.getIdJuego().equals(id));
         }
-        return "redirect:/carrito/ver";
+        return "carrito/ver";
     }
 }

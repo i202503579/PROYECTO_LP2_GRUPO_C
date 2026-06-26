@@ -7,3 +7,11 @@
 }
 .table-carrito { color: white !important; }
 .btn-pagar { background-color: rgb(242, 64, 93); color: white; border: none; }
+
+.btn-pagar:hover {
+    background-color: rgb(215, 45, 75) !important;
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(242, 64, 93, 0.4);
+    transition: all 0.3s ease;
+}

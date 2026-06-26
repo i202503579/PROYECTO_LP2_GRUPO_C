@@ -25,9 +25,13 @@ public class VentaService {
     private final DetalleRepository detalleRepository;
     private final JuegoRepository juegoRepository;
     
+    public List<Venta> getAllVentas() {
+    	return ventaRepository.findAll();
+    }
+    
     public void registrarVenta(Cliente cliente, List<CarritoItem> items) {
         Venta v = new Venta();
-        v.setIdVenta("VEN" + System.currentTimeMillis());
+        v.setIdVenta("V" + String.valueOf(System.currentTimeMillis()).substring(6));
         v.setCliente(cliente);
         v.setFechaVenta(LocalDate.now());
         v.setEstado("1");
@@ -40,7 +44,7 @@ public class VentaService {
         for (CarritoItem item : items) {
             Detalle d = new Detalle();
             d.setVenta(v);
-            d.setJuego(juegoRepository.findById(item.getIdJuego()).get());
+            d.setJuego(juegoRepository.findById(item.getIdJuego()).orElse(null));
             d.setCantidad(item.getCantidad());
             d.setPrecio(item.getPrecio());
             d.setEstado("1");

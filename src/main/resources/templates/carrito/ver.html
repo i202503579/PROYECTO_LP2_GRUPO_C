@@ -1,34 +1,77 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <title>Tu Carrito de Compras - MundoGamer</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
     <link rel="stylesheet" th:href="@{/css/carrito.css}">
+    <link rel="stylesheet" th:href="@{/css/registro.css}">
 </head>
 <body style="background-color: rgb(69, 69, 155);">
     <div class="container mt-5">
-        <div class="carrito-container">
-            <h2 class="mb-4">Tu Carrito de Compras</h2>
-            <table class="table table-carrito">
-                <thead>
-                    <tr><th>Juego</th><th>Precio</th><th>Cantidad</th><th>Subtotal</th><th>Acción</th></tr>
-                </thead>
-                <tbody>
-                    <tr th:each="item : ${session.carrito}">
-                        <td th:text="${item.descripcion}"></td>
-                        <td th:text="'S/. ' + ${item.precio}"></td>
-                        <td th:text="${item.cantidad}"></td>
-                        <td th:text="'S/. ' + ${item.precio * item.cantidad}"></td>
-                        <td>
-                            <form th:action="@{/carrito/eliminar}" method="post">
-                                <input type="hidden" name="id" th:value="${item.idJuego}">
-                                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-                            </form>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="text-end">
-                <a th:href="@{/carrito/confirmar}" class="btn btn-pagar btn-lg">Ir a Pagar</a>
+        <div class="carrito-container shadow-lg p-5">
+            
+            <h2 class="mb-4 fw-bold text-uppercase text-center">
+                <i class="bi bi-cart4 texto-acento"></i> Tu Carrito de Compras
+            </h2>
+            <hr style="border-color: var(--color-acento-principal); opacity: 0.3;">
+
+            <div class="table-responsive">
+                <table class="table table-carrito align-middle text-white m-0" style="--bs-table-bg: transparent !important; background-color: transparent !important;">
+                    <thead>
+                        <tr>
+                            <th class="py-3 ps-3 text-white border-0">Juego</th>
+                            <th class="py-3 text-end text-white border-0">Precio</th>
+                            <th class="py-3 text-center text-white border-0">Cantidad</th>
+                            <th class="py-3 text-end text-white border-0">Subtotal</th>
+                            <th class="py-3 pe-3 text-center text-white border-0">Acción</th>
+                        </tr>
+                    </thead>
+					<tbody>
+					    <tr th:each="item : ${session.carrito}" style="--bs-table-bg: transparent !important; background-color: transparent !important; border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;">
+					        <td class="py-3 ps-3 text-white border-0" th:text="${item.descripcion}"></td>
+					        <td class="py-3 text-end text-white border-0" th:text="'S/. ' + ${#numbers.formatDecimal(item.precio, 1, 2)}"></td>
+					        <td class="py-3 text-center text-white border-0" th:text="${item.cantidad}"></td>
+					        <td class="py-3 text-end border-0 fw-bold text-white" th:text="'S/. ' + ${#numbers.formatDecimal(item.precio * item.cantidad, 1, 2)}"></td>
+					        <td class="py-3 pe-3 text-center border-0">
+					            <form th:action="@{/carrito/eliminar}" method="post" class="m-0">
+					                <input type="hidden" name="id" th:value="${item.idJuego}">
+					                <button type="submit" class="btn btn-danger btn-sm px-3">
+					                    <i class="bi bi-trash3-fill"></i> Eliminar
+					                </button>
+					            </form>
+					        </td>
+					    </tr>
+					    
+					    <tr th:if="${#lists.isEmpty(session.carrito)}" style="--bs-table-bg: transparent !important; background-color: transparent !important;">
+					        <td colspan="5" class="text-center py-4 text-white-50">Tu carrito está vacío.</td>
+					    </tr>
+					</tbody>
+
+					<tfoot th:if="${not #lists.isEmpty(session.carrito)}">
+					    <tr style="--bs-table-bg: transparent !important; background-color: transparent !important; border-top: 2px solid var(--color-acento-principal);">
+					        <td colspan="2" class="border-0"></td>
+					        <td class="pt-4 text-end fs-5 fw-bold text-white border-0">Total General:</td>
+					        <td class="pt-4 text-end fs-4 fw-bold text-white border-0">
+					            S/. <span th:text="${#numbers.formatDecimal(#aggregates.sum(session.carrito.![precio * cantidad]), 1, 2)}"></span>
+					        </td>
+					        <td class="border-0"></td>
+					    </tr>
+					</tfoot>
+                </table>
+            </div>
+
+            <div class="d-flex justify-content-between mt-5">
+                <a th:href="@{/producto/juegos}" class="btn btn-cancelar px-4 py-2" style="text-decoration: none; max-width: 180px;">
+                    <i class="bi bi-arrow-left me-2"></i>Regresar
+                </a>
+                
+                <a th:if="${not #lists.isEmpty(session.carrito)}" th:href="@{/carrito/confirmar}" class="btn btn-pagar btn-lg fw-bold px-4 py-2">
+                    Ir a Pagar <i class="bi bi-credit-card-2-back ms-2"></i>
+                </a>
             </div>
         </div>
     </div>

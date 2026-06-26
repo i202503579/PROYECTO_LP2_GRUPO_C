@@ -19,72 +19,76 @@
 
             <div th:if="${error != null}" class="alert alert-danger text-center" th:text="${error}"></div>
 
-            <form th:action="@{/registrar-cuenta}" method="post" th:object="${cliente}">
-                
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Nombres</label>
-                        <input type="text" class="form-control" name="nombres" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Apellidos</label>
-                        <input type="text" class="form-control" name="apellidos" required>
-                    </div>
-                </div>
+			<form th:action="@{/registrar-cuenta}" method="post" th:object="${cliente}">
+			    
+			    <div class="row">
+			        <div class="col-md-6 mb-3">
+			            <label class="form-label">Nombres</label>
+			            <input type="text" class="form-control" name="nombres" 
+			                   pattern="[A-Za-zÁ-úá-úñÑ ]+" title="Solo se permiten letras y espacios" required>
+			        </div>
+			        <div class="col-md-6 mb-3">
+			            <label class="form-label">Apellidos</label>
+			            <input type="text" class="form-control" name="apellidos" 
+			                   pattern="[A-Za-zÁ-úá-úñÑ ]+" title="Solo se permiten letras y espacios" required>
+			        </div>
+			    </div>
 
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">DNI</label>
-                        <input type="text" class="form-control" name="dni" maxlength="8" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Teléfono</label>
-                        <input type="text" class="form-control" name="telefono" required>
-                    </div>
-                </div>
+			    <div class="row">
+			        <div class="col-md-6 mb-3">
+			            <label class="form-label">DNI</label>
+			            <input type="text" class="form-control" name="dni" 
+			                   maxlength="12" pattern="\d+" title="Debe contener solo números" required>
+			        </div>
+			        <div class="col-md-6 mb-3">
+			            <label class="form-label">Teléfono</label>
+			            <input type="tel" class="form-control" name="telefono" 
+			                   maxlength="20" pattern="[\+]?\d+" title="Ingrese un número telefónico válido (solo números)" required>
+			        </div>
+			    </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Dirección</label>
-                    <input type="text" class="form-control" name="direccion" required>
-                </div>
+			    <div class="mb-3">
+			        <label class="form-label">Dirección</label>
+			        <input type="text" class="form-control" name="direccion" maxlength="50" required>
+			    </div>
 
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Fecha de Nacimiento</label>
-                        <input type="date" class="form-control" name="fechaNacimiento" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Sexo</label>
-                        <select class="form-select" name="sexo" required>
-                            <option value="" disabled selected>Seleccione...</option>
-                            <option value="M">Masculino</option>
-                            <option value="F">Femenino</option>
-                        </select>
-                    </div>
-                </div>
+			    <div class="row">
+			        <div class="col-md-6 mb-3">
+			            <label class="form-label">Fecha de Nacimiento</label>
+			            <input type="date" class="form-control" name="fechaNacimiento" required>
+			        </div>
+			        <div class="col-md-6 mb-3">
+			            <label class="form-label">Sexo</label>
+			            <select class="form-select" name="sexo" required>
+			                <option value="" disabled selected>Seleccione...</option>
+			                <option value="M">Masculino</option>
+			                <option value="F">Femenino</option>
+			            </select>
+			        </div>
+			    </div>
 
-                <hr class="mt-4 mb-4" style="border-color: rgb(242, 64, 93); opacity: 0.5;">
+			    <hr class="mt-4 mb-4" style="border-color: rgb(242, 64, 93); opacity: 0.5;">
 
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Correo Electrónico</label>
-                        <input type="email" class="form-control" name="correo" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" name="password" required>
-                    </div>
-                </div>
+			    <div class="row">
+			        <div class="col-md-6 mb-3">
+			            <label class="form-label">Correo Electrónico</label>
+			            <input type="email" class="form-control" name="correo" maxlength="50" required>
+			        </div>
+			        <div class="col-md-6 mb-3">
+			            <label class="form-label">Contraseña</label>
+			            <input type="password" class="form-control" name="password" maxlength="255" required>
+			        </div>
+			    </div>
 
-                <div class="d-grid mt-4">
-                    <button type="submit" class="btn btn-tema fw-bold py-2">Registrarme</button>
-                </div>
-                <div class="text-center mt-3">
-                    <a href="/producto/inicio" class="text-white text-decoration-none" style="opacity: 0.8;">
-                        ¿Ya tienes una cuenta? <span class="texto-acento fw-bold">Inicia sesión</span>
-                    </a>
-                </div>
-            </form>
+			    <div class="d-grid mt-4">
+			        <button type="submit" class="btn btn-tema fw-bold py-2">Registrarme</button>
+			    </div>
+			    <div class="text-center mt-3">
+			        <a href="/producto/inicio" class="text-white text-decoration-none" style="opacity: 0.8;">
+			            ¿Ya tienes una cuenta? <span class="texto-acento fw-bold">Inicia sesión</span>
+			        </a>
+			    </div>
+			</form>
         </div>
     </section>
 
