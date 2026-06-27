@@ -56,5 +56,9 @@ public class Cliente {
 	
 	@Column(name = "Rol")
 	private String rol;
+	
+	public String getFullName() {
+		return String.format("%s %s", nombres, apellidos);
+	}
 }
 

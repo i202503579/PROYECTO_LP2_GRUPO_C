@@ -1,14 +1,13 @@
 package com.mundogamer.controller;
 
-import java.util.UUID;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import com.mundogamer.dto.AutenticacionFilter;
 import com.mundogamer.model.Cliente;
@@ -28,27 +27,36 @@ public class LoginController {
 
 	@PostMapping("/login")
 	public String procesarLogin(
-				@RequestParam String email, 
-				@RequestParam String password, 
+			@ModelAttribute AutenticacionFilter filter,
+			Model model, 
 				HttpSession session,
 				RedirectAttributes flash
 			) 
 	{
-		AutenticacionFilter filter = new AutenticacionFilter();
-		filter.setEmail(email);
-		filter.setPassword(password);
-
-		Cliente cliente = autenticacionService.autenticar(filter);
+		var cliente = autenticacionService.autenticar(filter);
+		
 
 		if (cliente == null) {
 			flash.addFlashAttribute("error", "Correo o contraseña incorrectos");
 			return "redirect:/producto/inicio";
 		}
-
-		session.setAttribute("usuario", cliente);
-
-		flash.addFlashAttribute("toast", Alert.sweetToast("¡Bienvenido " + cliente.getNombres() + "!", "success", 5000));
 		
+		if (!"1".equals(cliente.getEstado())) {
+		    flash.addFlashAttribute(
+		        "alert",
+		        Alert.sweetAlertError("La cuenta se encuentra inactiva")
+		    );
+
+		    System.out.println("login");
+		    return "redirect:/producto/inicio";
+		}
+		
+		session.setAttribute("usuario", cliente);
+		
+		//session.setMaxInactiveInterval(5000);
+		
+		String alert = Alert.sweetImageUrl("Bienvenido a MUNDOGAMER", cliente.getFullName(), "/img/felicidades.gif");
+		flash.addFlashAttribute("alert",alert);
 	    if ("ADMIN".equals(cliente.getRol())) {
 	        return "redirect:/admin/lista-juegos";
 	    }

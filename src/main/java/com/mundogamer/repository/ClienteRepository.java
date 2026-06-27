@@ -18,7 +18,7 @@ public interface ClienteRepository extends JpaRepository<Cliente, String>{
 	List<Cliente> findAllByOrderByEstadoAsc();
 	List<Cliente> findAllByOrderByIdClienteAsc();
 	
-	@Query("SELECT c FROM Cliente c WHERE c.correo = :email AND c.password = :password AND c.estado = '1'")
+	@Query("SELECT c FROM Cliente c WHERE c.correo = :email AND c.password = :password")
     Cliente autenticar(@Param("email") String email, @Param("password") String password);
 
 	

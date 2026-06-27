@@ -87,6 +87,9 @@
 	<div th:replace="~{fragments/footer :: pieDePagina}"></div>
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+	<div th:if="${alert != null}">
+	    <div th:utext="${alert}"></div>
+	</div>
 </body>
 
 </html>
