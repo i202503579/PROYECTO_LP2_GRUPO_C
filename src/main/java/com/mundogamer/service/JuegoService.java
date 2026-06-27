@@ -25,11 +25,13 @@ public class JuegoService {
 	
 	public Page<Juego> search(JuegoFilter filter, Pageable pageable) {
 
-	    if (filter == null || filter.getIdCategoria() == null || filter.getIdCategoria().isEmpty()) {
-	        return juegoRepository.findAllByOrderByDescripcionAsc(pageable);
-	    }
+		if (filter == null || 
+			       ((filter.getIdCategoria() == null || filter.getIdCategoria().isEmpty()) && 
+			        (filter.getDescripcion() == null || filter.getDescripcion().isEmpty()))) {
+			        return juegoRepository.findAllByOrderByDescripcionAsc(pageable);
+			    }
 
-	    return juegoRepository.findAllByFilters(filter.getIdCategoria(), pageable);
+		return juegoRepository.findAllByFilters(filter.getIdCategoria(), filter.getDescripcion(), pageable);
 	}
 	
 	public Juego getById(Integer id) {

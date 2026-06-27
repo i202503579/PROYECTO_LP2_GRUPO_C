@@ -21,9 +21,11 @@ public interface JuegoRepository extends JpaRepository<Juego, Integer> {
 		    select j
 		    from Juego j
 		    where (:idCategoria is null or :idCategoria = '' or j.categoria.idCategoria = :idCategoria)
-		""")
+			and (:descripcion is null or :descripcion = '' or lower(j.descripcion) like lower(concat('%', :descripcion, '%')))
+    """)
 		Page<Juego> findAllByFilters(
 		        @Param("idCategoria") String idCategoria,
+		        @Param("descripcion") String descripcion,
 		        Pageable pageable
 	);
 }
