@@ -73,8 +73,7 @@
 							<tr th:each="v : ${lstVentas}">
 							    <td th:text="${v.idVenta}"></td>
 							    <td th:text="${v.cliente.nombres}"></td>
-							    <td th:text="${v.fechaVenta}"></td>
-							    <td class="text-end" th:text="'S/. ' + ${#numbers.formatDecimal(v.montoTotal, 1, 2)}"></td>
+<td th:text="${#temporals.format(v.fechaVenta, 'dd/MM/yyyy HH:mm:ss')}"></td>							    <td class="text-end" th:text="'S/. ' + ${#numbers.formatDecimal(v.montoTotal, 1, 2)}"></td>
 							    <td class="text-center">
 							        <a th:href="@{/admin/detalle-venta/{id}(id=${v.idVenta})}" class="btn btn-sm btn-info text-white">Ver Productos</a>
 									<a th:href="@{/admin/boleta(numBol=${v.IdVenta})}" target="_blank" 

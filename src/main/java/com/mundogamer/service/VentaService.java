@@ -1,6 +1,5 @@
 package com.mundogamer.service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -33,8 +32,7 @@ public class VentaService {
         Venta v = new Venta();
         v.setIdVenta("V" + String.valueOf(System.currentTimeMillis()).substring(6));
         v.setCliente(cliente);
-        v.setFechaVenta(LocalDate.now());
-        v.setEstado("1");
+        v.setFechaVenta(java.time.LocalDateTime.now());        v.setEstado("1");
         
         double total = items.stream().mapToDouble(i -> i.getPrecio() * i.getCantidad()).sum();
         v.setMontoTotal(total);
@@ -49,6 +47,11 @@ public class VentaService {
             d.setPrecio(item.getPrecio());
             d.setEstado("1");
             detalleRepository.save(d);
-        }
+        }    
+
+    }
+    
+    public List<Venta> listarPorCliente(String idCliente) {
+        return ventaRepository.findByClienteIdCliente(idCliente); 
     }
 }

@@ -141,7 +141,7 @@ DROP TABLE IF EXISTS Ventas;
 CREATE TABLE Ventas (
     IdVenta CHAR(10) NOT NULL,
     IdCliente CHAR(8) NOT NULL,
-    FechaVenta DATE NOT NULL,
+    FechaVenta DATETIME  NOT NULL,
     MontoTotal DECIMAL(10 , 2 ) NOT NULL,
     Estado CHAR(1) NOT NULL,
     PRIMARY KEY (IdVenta),

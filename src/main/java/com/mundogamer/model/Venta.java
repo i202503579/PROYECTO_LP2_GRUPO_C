@@ -1,6 +1,6 @@
 package com.mundogamer.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,7 +26,7 @@ public class Venta {
 	private Cliente cliente;
 	
 	@Column(name = "FechaVenta")
-	private LocalDate fechaVenta;
+	private LocalDateTime fechaVenta;
 	
 	@Column(name = "MontoTotal")
 	private Double montoTotal;
