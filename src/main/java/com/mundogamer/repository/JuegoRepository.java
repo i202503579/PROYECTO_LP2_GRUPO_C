@@ -18,12 +18,12 @@ public interface JuegoRepository extends JpaRepository<Juego, Integer> {
 	List<Juego> findAllByOrderByIdJuegosDesc();
 	
 	@Query("""
-            select j
-            from Juego as j
-			where (:idCategoria is null or :idCategoria = '' or j.categoria.idCategoria = :idCategoria)            
-			""")
-	Page<Juego> findAllByFilters(
-	        @Param("idCategoria") String idCategoria,
-	        Pageable pageable
-	);	
+		    select j
+		    from Juego j
+		    where (:idCategoria is null or :idCategoria = '' or j.categoria.idCategoria = :idCategoria)
+		""")
+		Page<Juego> findAllByFilters(
+		        @Param("idCategoria") String idCategoria,
+		        Pageable pageable
+	);
 }

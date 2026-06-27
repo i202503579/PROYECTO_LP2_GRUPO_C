@@ -6,6 +6,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,10 +52,19 @@ public class AdminController {
 	}
 	
 	@GetMapping("filtra-juegos")
-	public String filtrado(@ModelAttribute JuegoFilter filter_j,Model model) {
-	    model.addAttribute("lstJuegos", juegoService.search(filter_j));
+	public String filtrado(
+	        @ModelAttribute JuegoFilter filter_j,
+	        @RequestParam(defaultValue = "0") int page,
+	        Model model) {
+
+	    Pageable pageable = PageRequest.of(page, 10);
+
+	    Page<Juego> lista = juegoService.search(filter_j, pageable);
+
+	    model.addAttribute("lstJuegos", lista);
 	    model.addAttribute("categorias", categoriaService.getAll());
 	    model.addAttribute("filter_j", filter_j);
+
 	    return "admin/lista-juegos";
 	}
 	

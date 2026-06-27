@@ -145,8 +145,7 @@ CREATE TABLE Ventas (
     MontoTotal DECIMAL(10 , 2 ) NOT NULL,
     Estado CHAR(1) NOT NULL,
     PRIMARY KEY (IdVenta),
-    FOREIGN KEY (IdCliente)
-        REFERENCES Clientes (IdCliente),
+    FOREIGN KEY (IdCliente) REFERENCES Clientes (IdCliente),
     CHECK (MontoTotal > 0),
     CHECK (Estado IN ('0' , '1'))
 );
@@ -190,3 +189,27 @@ INSERT INTO Mensajes (IdCliente, TextoMensaje, FechaEnvio, Estado) VALUES
 ('81234590', 'Ya realicé el pago, ¿cuándo me confirman?', '2026-06-21 09:30:00', '1'),
 ('70234891', 'El juego llegó dañado, necesito reemplazo', '2026-06-21 18:20:00', '1'),
 ('74891230', 'Gracias por la rápida respuesta', '2026-06-22 10:00:00', '1');
+
+-- Creación de vistas para reporte
+DROP VIEW IF EXISTS v_header_boleta;
+CREATE VIEW v_header_boleta AS
+SELECT
+    v.IdVenta,
+    CONCAT('B001 - ', LPAD(v.IdVenta, 6, '0')) AS NumeroBoleta,
+    CONCAT(c.Nombres,' ',c.Apellidos) AS NombreCompletoCliente,
+    DATE_FORMAT(v.FechaVenta, '%d/%m/%Y %h:%i:%s %p') AS FechaTexto,
+    v.MontoTotal
+FROM Ventas v
+	INNER JOIN Clientes c ON v.IdCliente = c.IdCliente;
+
+DROP VIEW IF EXISTS v_detail_boleta;
+CREATE VIEW v_detail_boleta AS
+SELECT
+    d.IdVenta AS IdVenta,
+    j.IdJuegos AS IdJuegos,
+    j.Descripcion AS Descripcion,
+    d.Cantidad AS Cantidad,
+    d.Precio AS Precio,
+    d.Cantidad * d.Precio AS SubTotal
+FROM Detalle d
+	INNER JOIN Juegos j ON d.IdJuegos = j.IdJuegos;

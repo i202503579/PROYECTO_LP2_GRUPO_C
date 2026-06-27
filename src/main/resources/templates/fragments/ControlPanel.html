@@ -1,46 +1,46 @@
-<div class="d-flex" style="min-height: 100vh;" th:fragment="PanelControl">
-
+<div th:fragment="layoutAdmin">
 	<div class="sidebar p-3 d-flex flex-column" style="width: 250px; background-color: rgba(0, 0, 0, 0.3);">
-		<a th:href="@{/}" class="text-white text-decoration-none text-center mb-4 mt-2">
-			<h3 style="color: var(--color-acento-principal); font-weight: bold;">MundoGamer</h3>
-			<small>Panel de Control</small>
-		</a>
+				<a th:href="@{/}" class="text-white text-decoration-none text-center mb-4 mt-2">
+					<h3 style="color: var(--color-acento-principal); font-weight: bold;">MundoGamer</h3>
+					<small>Panel de Control</small>
+				</a>
 
-		<hr class="text-white">
+				<hr class="text-white">
 
-		<ul class="nav nav-pills flex-column mb-auto">
-			<li class="nav-item mb-2">
-				<a th:href="@{/admin/lista-juegos}" class="nav-link text-white item-sidebar active"
-					style="background-color: var(--color-acento-principal);">
-					<i class="bi bi-joystick"></i> Gestión de Juegos
-				</a>
-			</li>
-			<li class="nav-item mb-2">
-				<a th:href="@{/admin/lista-categorias}" class="nav-link text-white item-sidebar">
-					<i class="bi bi-list-stars"></i></i> Categorias
-				</a>
-			</li>
-			<li class="nav-item mb-2">
-				<a th:href="@{/admin/lista-usuarios}" class="nav-link text-white">
-					<i class="bi bi-people-fill"></i> Usuarios
-				</a>
-			</li>
-			<li class="nav-item mb-2">
-				<a th:href="@{/admin/mensaje}" class="nav-link text-white item-sidebar">
-					<i class="bi bi-chat-left-dots-fill"></i> Mensajes
-				</a>
-			</li>
-			<li class="nav-item mb-2">
-				<a th:href="@{/admin/lista-ventas}" class="nav-link text-white item-sidebar">
-					<i class="bi bi-cart-check-fill"></i> Ventas
-				</a>
-			</li>
-			<li class="nav-item mb-2 text-center">
-				<form method="post" th:action="@{/logout}">
-					<button type="submit" class="btn btn-link text-danger text-decoration-none">
-						<i class="bi bi-box-arrow-right"></i> Cerrar Sesión
-					</button>
-				 </form>
-			</li>
-		</ul>
-	</div>
+				<ul class="nav nav-pills flex-column mb-auto">
+					<li class="nav-item mb-2">
+						<a th:href="@{/admin/lista-juegos}" class="nav-link text-white item-sidebar">
+							<i class="bi bi-joystick"></i> Gestión de Juegos
+						</a>
+					</li>
+					<li class="nav-item mb-2">
+						<a th:href="@{/admin/lista-categorias}" class="nav-link text-white item-sidebar">
+							<i class="bi bi-list-stars"></i> Categorias
+						</a>
+					</li>
+					<li class="nav-item mb-2">
+						<a th:href="@{/admin/lista-usuarios}" class="nav-link text-white">
+							<i class="bi bi-people-fill"></i> Usuarios
+						</a>
+					</li>
+					<li class="nav-item mb-2">
+						<a th:href="@{/admin/mensaje}" class="nav-link text-white item-sidebar active"
+							style="background-color: var(--color-acento-principal);">
+							<i class="bi bi-chat-left-dots-fill"></i> Mensajes
+						</a>
+					</li>
+					<li class="nav-item mb-2">
+						<a th:href="@{/admin/lista-ventas}" class="nav-link text-white item-sidebar">
+							<i class="bi bi-cart-check-fill"></i> Ventas
+						</a>
+					</li>
+					<li class="nav-item mb-2 text-center">
+						<form method="post" th:action="@{/logout}">
+							<button type="submit" class="btn btn-link text-danger text-decoration-none">
+								<i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+							</button>
+						</form>
+					</li>
+				</ul>
+			</div>
+</div>

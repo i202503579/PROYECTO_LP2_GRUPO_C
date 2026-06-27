@@ -77,7 +77,7 @@
 							    <td class="text-end" th:text="'S/. ' + ${#numbers.formatDecimal(v.montoTotal, 1, 2)}"></td>
 							    <td class="text-center">
 							        <a th:href="@{/admin/detalle-venta/{id}(id=${v.idVenta})}" class="btn btn-sm btn-info text-white">Ver Productos</a>
-									<a th:href="@{/admin/boleta(numBol=${v.idVenta})}" target="_blank" 
+									<a th:href="@{/admin/boleta(numBol=${v.IdVenta})}" target="_blank" 
 										class="btn btn-sm btn-danger"><i class="bi bi-file-pdf"></i> PDF</a>
 								</td>
 

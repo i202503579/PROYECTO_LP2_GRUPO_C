@@ -24,9 +24,11 @@ public class JuegoService {
 	}
 	
 	public Page<Juego> search(JuegoFilter filter, Pageable pageable) {
-		if (filter == null || filter.getIdCategoria() == null || filter.getIdCategoria().trim().isEmpty()) {
+
+	    if (filter == null || filter.getIdCategoria() == null || filter.getIdCategoria().isEmpty()) {
 	        return juegoRepository.findAllByOrderByDescripcionAsc(pageable);
 	    }
+
 	    return juegoRepository.findAllByFilters(filter.getIdCategoria(), pageable);
 	}
 	
@@ -41,14 +43,6 @@ public class JuegoService {
 	    return juegoRepository.findAllByOrderByIdJuegosDesc();
 	}
 	
-	public List<Juego> search(JuegoFilter filter) {
-
-	    if (filter == null || filter.getIdCategoria() == null || filter.getIdCategoria().trim().isEmpty()) {
-	        return juegoRepository.findAll();
-	    }
-
-	    return juegoRepository.findAllByFilters(filter.getIdCategoria(), Pageable.unpaged()) .getContent();
-	}
 	
 	public ResultadoResponse create(Juego juego) {
 	    try {
