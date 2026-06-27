@@ -14,6 +14,7 @@
 	<script src="https://cdn.datatables.net/2.3.2/js/dataTables.bootstrap5.js"></script>
 	<link rel="stylesheet" th:href="@{/css/admin.css}">
 	<link rel="stylesheet" th:href="@{/css/dataTable.css}">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -167,7 +168,9 @@
 			});
 		</script>
 	</div>
-	
+	<div th:if="${Alert != null}">
+	    <div th:utext="${Alert}"></div>
+	</div>
 </body>
 
 </html>
