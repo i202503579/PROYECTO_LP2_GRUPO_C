@@ -140,7 +140,7 @@
 			$(document).ready(function () {
 				$('#tbl-juegos').DataTable({
 					language: {
-						search: 'Buscar (Nombre):',
+						search: 'Buscar Por Nombre:',
 						url: 'https://cdn.datatables.net/plug-ins/1.13.8/i18n/es-ES.json',
 						"lengthMenu": "Mostrar _MENU_ juegos",
 						"zeroRecords": "No se encontraron juegos",
@@ -160,7 +160,7 @@
 					ordering: true,
 					responsive: true,
 					columnDefs: [
-						{targets: [0,5], orderable: false}
+						{targets: [2], orderable: false}
 					]
 				});
 			});
